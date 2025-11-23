@@ -16,13 +16,19 @@ Power BI Desktop – Building the dashboard based on SQL insights.
 
 ## Connecting to the AdventureWorks Database
 
-I restored the AdventureWorks2022 sample database in SQL Server Management Studio (SSMS) following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms).
-
-Below are the screenshots showing each step:
+I restored the AdventureWorks2022 sample database in SQL Server Management Studio (SSMS) following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):
 
 - Locating the .bak file
 
 ![bak file](https://github.com/user-attachments/assets/e30a8c9b-4b82-4b87-915b-af873a4275cc)
 
 - Moving the .bak file into the SQL Server backup folder
+
+![sql server backup location](https://github.com/user-attachments/assets/aea074e3-cf97-4a76-99ef-23046060a116)
+
 - Restoring the database from SSMS
+
+![restore database](https://github.com/user-attachments/assets/51055724-7456-420e-b5a6-542df1a8e679)
+
+
+
