@@ -33,4 +33,4 @@ I restored the AdventureWorks2022 sample database in SQL Server Management Studi
 
 - That’s it: the connection is set up and ready for querying
 
-![connection restored succesfully](https://github.com/user-attachments/assets/732ef143-fc18-47ce-8acc-21bf4d9ec4ed) ![database table](https://github.com/user-attachments/assets/beda3565-ba5e-4805-a335-600c8db1288b)
+![connection restored succesfully](https://github.com/user-attachments/assets/fb6aca1c-09c2-4d23-865e-27432ac7bffa)
