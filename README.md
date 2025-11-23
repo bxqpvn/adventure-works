@@ -21,7 +21,7 @@ I restored the AdventureWorks2022 sample database in SQL Server Management Studi
 
 - Moving the .bak file into the SQL Server backup folder
 
-![sql server backup location](https://github.com/user-attachments/assets/da8d16e2-250f-44b9-a207-e9f29c264259")
+![sql server backup location](https://github.com/user-attachments/assets/c51e97dc-dae7-4641-8f58-5c37ee215751)
 
 
 - Restoring the database from SSMS
