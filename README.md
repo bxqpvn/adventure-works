@@ -8,11 +8,11 @@
 
 SQL Server Management Studio (SSMS) 22 – Querying and managing the AdventureWorks database
 
-SQL Server Express – Local SQL environment for restoring and working with the database.
+SQL Server Express – Local SQL environment for restoring and working with the database
 
-AdventureWorks 2022 – Sample dataset used for analysis.
+AdventureWorks 2022 – Sample dataset used for analysis
 
-Power BI Desktop – Building the dashboard based on SQL insights.
+Power BI Desktop – Building the dashboard based on SQL insights
 
 ## Connecting to the AdventureWorks Database
 
