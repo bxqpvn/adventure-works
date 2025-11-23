@@ -6,13 +6,13 @@
 
 ## Tools
 
-### SQL Server Management Studio (SSMS) 22 – Querying and managing the AdventureWorks database
+SQL Server Management Studio (SSMS) 22 – Querying and managing the AdventureWorks database
 
-### SQL Server Express – Local SQL environment for restoring and working with the database.
+SQL Server Express – Local SQL environment for restoring and working with the database.
 
-### AdventureWorks 2022 – Sample dataset used for analysis.
+AdventureWorks 2022 – Sample dataset used for analysis.
 
-### Power BI Desktop – Building the dashboard based on SQL insights.
+Power BI Desktop – Building the dashboard based on SQL insights.
 
 ## Connecting to the AdventureWorks Database
 
@@ -21,7 +21,7 @@ I restored the AdventureWorks2022 sample database in SQL Server Management Studi
 Below are the screenshots showing each step:
 
 - Locating the .bak file
-![bak file](<img width="845" height="718" alt="locate backup file" src="https://github.com/user-attachments/assets/e30a8c9b-4b82-4b87-915b-af873a4275cc" />)
+![bak file](https://github.com/user-attachments/assets/e30a8c9b-4b82-4b87-915b-af873a4275cc")
 
 - Moving the .bak file into the SQL Server backup folder
 - Restoring the database from SSMS
