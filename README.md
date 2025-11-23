@@ -23,12 +23,14 @@ I restored the AdventureWorks2022 sample database in SQL Server Management Studi
 
 ![sql server backup location](https://github.com/user-attachments/assets/c51e97dc-dae7-4641-8f58-5c37ee215751)
 
-
 - Restoring the database from SSMS
 
 ![restore database](https://github.com/user-attachments/assets/51055724-7456-420e-b5a6-542df1a8e679)
 
-
 - Locating the .bak file
 
 ![bak file](https://github.com/user-attachments/assets/e30a8c9b-4b82-4b87-915b-af873a4275cc)
+
+- That’s it: the connection is set up and ready for querying
+
+![connection restored succesfully](https://github.com/user-attachments/assets/732ef143-fc18-47ce-8acc-21bf4d9ec4ed) ![database table](https://github.com/user-attachments/assets/beda3565-ba5e-4805-a335-600c8db1288b)
