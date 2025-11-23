@@ -1,4 +1,4 @@
-# **AdventureWorks**
+# **ADVENTUREWORKS**
 
 >[!NOTE]
 >## Project Overview & Tools
