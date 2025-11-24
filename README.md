@@ -15,7 +15,7 @@
 >
 >Power BI Desktop – Building the dashboard based on SQL insights
 
-## 1.Connecting to the AdventureWorks Database
+## 1. Connecting to the AdventureWorks Database
 
 I restored the AdventureWorks2022 sample database in SSMS following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):
 
@@ -36,7 +36,7 @@ I restored the AdventureWorks2022 sample database in SSMS following the official
 
 ![connection restored succesfully](https://github.com/user-attachments/assets/fb6aca1c-09c2-4d23-865e-27432ac7bffa)
 
-## 2.Database Diagrams
+## 2. Database Diagrams
 
 To better understand the structure of the AdventureWorks database, I created database diagrams in SQL Server. These diagrams help visualize table relationship, primary keys and foreign keys, connections and the overall schema structure.
 
