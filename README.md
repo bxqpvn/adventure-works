@@ -1,11 +1,11 @@
 # **ADVENTUREWORKS**
 
 >[!NOTE]
->## Project Overview & Tools
+>### Project Overview & Tools
 >
->### In this project, I will use SSMS 22 to connect to the AdventureWorks database. I will explore and analyze the tables, writing SQL queries to practice and demonstrate my SQL skills. After completing the SQL analysis, I also plan to build my first Power BI dashboard based on the insights gathered from the dataset.
+>In this project, I will use SSMS 22 to connect to the AdventureWorks database. I will explore and analyze the tables, writing SQL queries to practice and demonstrate my SQL skills. After completing the SQL analysis, I also plan to build my first Power BI dashboard based on the insights gathered from the dataset.
 >
->### Tools:
+>Tools:
 >
 >SQL Server Management Studio (SSMS) 22 – Querying and managing the AdventureWorks database
 >
@@ -35,3 +35,18 @@ I restored the AdventureWorks2022 sample database in SQL Server Management Studi
 - That’s it: the connection is set up and ready for querying
 
 ![connection restored succesfully](https://github.com/user-attachments/assets/fb6aca1c-09c2-4d23-865e-27432ac7bffa)
+
+## Database Diagrams
+
+To better understand the structure of the AdventureWorks database, I created database diagrams in SQL Server. These diagrams help visualize table relationship, primary keys and foreign keys, connections and the overall schema structure.
+
+I generated diagrams for two major areas of the database:
+
+- Production
+
+![production diagram](https://github.com/user-attachments/assets/08b41cee-4061-4f46-9aaa-6b1c35f73303)
+
+- Sales
+
+![sales diagram](https://github.com/user-attachments/assets/84145dfc-eeee-48b6-a47c-47ad82f3bb79)
+
