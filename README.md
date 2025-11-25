@@ -38,9 +38,7 @@ I restored the AdventureWorks2022 sample database in SSMS following the official
 
 ## 2. Database Diagrams
 
-To better understand the structure of the AdventureWorks database, I created database diagrams in SQL Server. These diagrams help visualize table relationship, primary keys and foreign keys, connections and the overall schema structure.
-
-I generated diagrams for two major areas of the database:
+To better understand the structure of the AdventureWorks database, I created diagrams for each major functional areas:
 
 - Production
 
@@ -49,6 +47,20 @@ I generated diagrams for two major areas of the database:
 - Sales
 
 ![sales diagram](https://github.com/user-attachments/assets/84145dfc-eeee-48b6-a47c-47ad82f3bb79)
+
+- Human Resources
+
+![HR diagram](https://github.com/user-attachments/assets/d404af5a-e1f6-40b6-a51f-d2f9d623b212)
+
+- Person
+
+![person diagram](https://github.com/user-attachments/assets/61298b4c-d714-4764-a5ca-4510c324a3b6)
+
+- Purchasing
+
+![purchasing diagram](https://github.com/user-attachments/assets/9323abc5-d35e-45ac-8e07-666d4764c588)
+
+These diagrams help visualize table relationship (PK-FK), connections and the overall schema structure.
 
 >[!IMPORTANT]
 >These diagrams will help with the SQL queries in the next section.
