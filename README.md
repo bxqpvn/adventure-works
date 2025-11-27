@@ -64,3 +64,13 @@ These diagrams help visualize table relationship (PK-FK), connections and the ov
 
 >[!IMPORTANT]
 >These diagrams will help with the SQL queries in the next section.
+
+## 3. Database Exploration by Functional Area
+
+In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.
+
+>![TIP]
+>**Quick Tip**
+>Here is how you can open the table properties to view column definitions and other details.
+
+[!table and column properties](https://github.com/user-attachments/assets/0ce933f3-4a3c-4ca3-8e85-a07ff9d78e36)
