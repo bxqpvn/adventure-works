@@ -73,4 +73,4 @@ In this section, I explore each functional area by reviewing table relationships
 >**Quick Tip**
 >Here is how you can open the table properties to view column definitions and other details.
 
-[!table and column properties](https://github.com/user-attachments/assets/0ce933f3-4a3c-4ca3-8e85-a07ff9d78e36)
+![table and column properties](https://github.com/user-attachments/assets/0ce933f3-4a3c-4ca3-8e85-a07ff9d78e36)
