@@ -69,20 +69,6 @@ These diagrams help visualize table relationship (PK-FK), connections and the ov
 
 In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.
 
-### Production
+***Production***
 
 ![model, images, documents, reviews](https://github.com/user-attachments/assets/cd5a887f-2f9a-4602-b086-add88f137d9c) ![simple queries for the product, category, subcategory](https://github.com/user-attachments/assets/553b90a9-8609-45dd-890f-f24a2edfea1d)
-
-### Sales
-
-
-
-### Human Resources
-
-
-
-### Purchasing
-
-
-
-### Person
