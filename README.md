@@ -71,18 +71,18 @@ In this section, I explore each functional area by reviewing table relationships
 
 ### Production
 
+![model, images, documents](https://github.com/user-attachments/assets/b065210d-cead-41c5-9733-1b3f82ed5a7d)  ![simple queries for the product, category, subcategory](https://github.com/user-attachments/assets/373bf066-b85d-4bd5-9402-6595cc85d053)
 
-
-## Sales
-
-
-
-## Human Resources
+### Sales
 
 
 
-## Purchasing
+### Human Resources
 
 
 
-## Person
+### Purchasing
+
+
+
+### Person
