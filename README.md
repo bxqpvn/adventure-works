@@ -40,23 +40,23 @@ I restored the AdventureWorks2022 sample database in SSMS following the official
 
 To better understand the structure of the AdventureWorks database, I created diagrams for each major functional areas:
 
-- Production
+- **Production**
 
 ![production diagram](https://github.com/user-attachments/assets/08b41cee-4061-4f46-9aaa-6b1c35f73303)
 
-- Sales
+- **Sales**
 
 ![sales diagram](https://github.com/user-attachments/assets/84145dfc-eeee-48b6-a47c-47ad82f3bb79)
 
-- Human Resources
+- **Human Resources**
 
 ![HR diagram](https://github.com/user-attachments/assets/d404af5a-e1f6-40b6-a51f-d2f9d623b212)
 
-- Person
+- **Person**
 
 ![person diagram](https://github.com/user-attachments/assets/61298b4c-d714-4764-a5ca-4510c324a3b6)
 
-- Purchasing
+- **Purchasing**
 
 ![purchasing diagram](https://github.com/user-attachments/assets/9323abc5-d35e-45ac-8e07-666d4764c588)
 
@@ -69,8 +69,20 @@ These diagrams help visualize table relationship (PK-FK), connections and the ov
 
 In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.
 
->[!TIP]
->
->Here is how you can open the table properties to view column definitions and other details.
+### Production
 
-![table and column properties](https://github.com/user-attachments/assets/0ce933f3-4a3c-4ca3-8e85-a07ff9d78e36) ![sales properties](https://github.com/user-attachments/assets/67d6e86b-dda7-49c8-9e51-e90d9d8ac291)
+
+
+## Sales
+
+
+
+## Human Resources
+
+
+
+## Purchasing
+
+
+
+## Person
