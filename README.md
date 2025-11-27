@@ -73,4 +73,4 @@ In this section, I explore each functional area by reviewing table relationships
 >
 >Here is how you can open the table properties to view column definitions and other details.
 
-![table and column properties](https://github.com/user-attachments/assets/0ce933f3-4a3c-4ca3-8e85-a07ff9d78e36) ![product table properties](https://github.com/user-attachments/assets/b25ba8d7-28e2-4f0b-a541-b7ecbadb1df5) ![sales properties](https://github.com/user-attachments/assets/67d6e86b-dda7-49c8-9e51-e90d9d8ac291) ![shipping methot column properties](https://github.com/user-attachments/assets/a22cfb6c-1058-429d-97bf-e5eb2fab9252)
+![table and column properties](https://github.com/user-attachments/assets/0ce933f3-4a3c-4ca3-8e85-a07ff9d78e36)![sales properties](https://github.com/user-attachments/assets/67d6e86b-dda7-49c8-9e51-e90d9d8ac291)![product table properties](https://github.com/user-attachments/assets/b25ba8d7-28e2-4f0b-a541-b7ecbadb1df5)  ![shipping methot column properties](https://github.com/user-attachments/assets/a22cfb6c-1058-429d-97bf-e5eb2fab9252)
