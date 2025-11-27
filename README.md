@@ -69,7 +69,7 @@ These diagrams help visualize table relationship (PK-FK), connections and the ov
 
 In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.
 
->![TIP]
+>[!TIP]
 >**Quick Tip**
 >Here is how you can open the table properties to view column definitions and other details.
 
