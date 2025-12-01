@@ -42,28 +42,30 @@ To better understand the structure of the AdventureWorks database, I created dia
 
 - **Production**
 
-![production diagram](https://github.com/user-attachments/assets/08b41cee-4061-4f46-9aaa-6b1c35f73303)
+![production diagram](https://github.com/user-attachments/assets/37165444-0abf-4e05-8d3a-06c7db46be77)
 
 - **Sales**
 
-![sales diagram](https://github.com/user-attachments/assets/84145dfc-eeee-48b6-a47c-47ad82f3bb79)
+![sales diagram](https://github.com/user-attachments/assets/2700a126-94cf-4c09-811f-261971652935)
 
 - **Human Resources**
 
-![HR diagram](https://github.com/user-attachments/assets/d404af5a-e1f6-40b6-a51f-d2f9d623b212)
+![HR diagram](https://github.com/user-attachments/assets/1b894189-4998-4228-8242-b0a256c95fb1)
 
 - **Person**
 
-![person diagram](https://github.com/user-attachments/assets/61298b4c-d714-4764-a5ca-4510c324a3b6)
+![person diagram](https://github.com/user-attachments/assets/425e89c7-d78e-46d5-b86b-3e2fabb6f939)
 
 - **Purchasing**
 
-![purchasing diagram](https://github.com/user-attachments/assets/9323abc5-d35e-45ac-8e07-666d4764c588)
+![purchasing diagram](https://github.com/user-attachments/assets/8a9e729c-74b0-44d3-8541-071380b337e0)
 
-These diagrams help visualize table relationship (PK-FK), connections and the overall schema structure.
+Done! This is how it looks in the Object Explorer window: 
+
+![database diagrams](https://github.com/user-attachments/assets/920a01a0-b819-4b96-93d1-eca7c909a21f)
 
 >[!IMPORTANT]
->These diagrams will help with the SQL queries in the next section.
+>By showing table relationships (PK–FK) and the overall schema structure, these diagrams serve as a foundation for the SQL queries covered in the next section.
 
 ## 3. Database Exploration by Functional Area
 
