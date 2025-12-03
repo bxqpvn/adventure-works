@@ -77,4 +77,4 @@ I started with exploratory SQL queries to review tables across all functional ar
 
 As a result, I obtained a table listing all tables for each schema.
 
-![production tables](https://github.com/user-attachments/assets/65479861-2ecf-4db8-80cc-35728dfa7b63) ![sales tables](https://github.com/user-attachments/assets/f9548ce9-5a45-4769-a600-09ed69543b29) ![hr tables](https://github.com/user-attachments/assets/fb160937-aaf9-439c-97f2-5e71cdee49fb) ![person tables](https://github.com/user-attachments/assets/dbbd05b5-97df-41b8-84e1-05bf2d18a47b) ![purchasing tables](https://github.com/user-attachments/assets/2838852c-1d9a-431e-9574-510696e2e33e)
+![production tables](https://github.com/user-attachments/assets/65479861-2ecf-4db8-80cc-35728dfa7b63) ![sales tables](https://github.com/user-attachments/assets/f9548ce9-5a45-4769-a600-09ed69543b29) ![person tables](https://github.com/user-attachments/assets/dbbd05b5-97df-41b8-84e1-05bf2d18a47b) ![hr tables](https://github.com/user-attachments/assets/fb160937-aaf9-439c-97f2-5e71cdee49fb) ![purchasing tables](https://github.com/user-attachments/assets/2838852c-1d9a-431e-9574-510696e2e33e)
