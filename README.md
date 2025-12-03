@@ -79,4 +79,4 @@ As a result, I obtained a table listing all tables for each schema.
 
 ![schema tables](https://github.com/user-attachments/assets/a88c1cba-6a7c-4ed7-bc4c-dfe29d316e5b)
 
-![production tables](https://github.com/user-attachments/assets/1e9249c0-88e0-4a53-afb0-04bcaa5a8f86) ![sales tables](https://github.com/user-attachments/assets/b45d0992-2048-4add-be7c-22d5f3a22fe2) 
+![production tables](https://github.com/user-attachments/assets/65479861-2ecf-4db8-80cc-35728dfa7b63) ![sales tables](https://github.com/user-attachments/assets/f9548ce9-5a45-4769-a600-09ed69543b29) 
