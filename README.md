@@ -1,4 +1,4 @@
-[!adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
+![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
 
 ***AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
 
@@ -74,6 +74,8 @@ In this section, I explore each functional area by reviewing table relationships
 I started with exploratory SQL queries to review tables across all functional areas.
 
 ![tables by functional area](https://github.com/user-attachments/assets/2f2a7760-903d-4254-a162-f8c0722d3a43)
+
+As a result, I obtained a table listing all tables for each schema.
 
 ![schema tables](https://github.com/user-attachments/assets/a88c1cba-6a7c-4ed7-bc4c-dfe29d316e5b)
 
