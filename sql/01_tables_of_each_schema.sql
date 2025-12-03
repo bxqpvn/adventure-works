@@ -1,3 +1,5 @@
+
+-- Purpose: Explore database schemas and list tables per functional area
 /*Tables by functional area*/
 
 -- Production
