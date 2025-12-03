@@ -1,10 +1,11 @@
-# **ADVENTUREWORKS**
+[!adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
+
+***AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
 
 >[!NOTE]
 >### Project Overview & Tools
 >
->In this project, I will use SSMS 22 to connect to the AdventureWorks database. I will explore and analyze the tables, writing SQL queries to practice and demonstrate my SQL skills. After completing the SQL analysis, I also plan to build my first Power BI dashboard based on the insights gathered from the dataset.
->
+>*In this project, I will use SSMS 22 to connect to the AdventureWorks database. I will explore and analyze the tables, writing SQL queries to practice and demonstrate my SQL skills. After completing the SQL analysis, I also plan to build my first Power BI dashboard based on the insights gathered from the dataset.*
 >Tools:
 >
 >SQL Server Management Studio (SSMS) 22 – Querying and managing the AdventureWorks database
@@ -18,7 +19,6 @@
 ## 1. Connecting to the AdventureWorks Database
 
 I restored the AdventureWorks2022 sample database in SSMS following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):
-
 
 - Moving the .bak file into the SQL Server backup folder
 
@@ -67,6 +67,13 @@ Done! This is how it looks in the Object Explorer window:
 >[!IMPORTANT]
 >By showing table relationships (PK–FK) and the overall schema structure, these diagrams serve as a foundation for the SQL queries covered in the next section.
 
-## 3. Database Exploration by Functional Area
+## 3. Database Exploration
 
 In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.
+
+I started with exploratory SQL queries to review tables across all functional areas.
+
+![tables by functional area](https://github.com/user-attachments/assets/2f2a7760-903d-4254-a162-f8c0722d3a43)
+
+![schema tables](https://github.com/user-attachments/assets/a88c1cba-6a7c-4ed7-bc4c-dfe29d316e5b)
+
