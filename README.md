@@ -77,4 +77,10 @@ I started with exploratory SQL queries to review tables across all functional ar
 
 As a result, I obtained a table listing all tables for each schema.
 
-![canva schema tables](https://github.com/user-attachments/assets/5fb37f46-44d5-4499-81f8-8105cc7a8d3f)
+![canva schema tables](https://github.com/user-attachments/assets/c08d9b87-ab12-4e75-a239-3f5506e95af6)
+
+Then, I used the Properties window to explore details for tables and columns.
+
+![properties 1](https://github.com/user-attachments/assets/730b2498-a4f6-46d9-85ba-bbca2b4f8bab)
+
+![properties 2](https://github.com/user-attachments/assets/e2d1fb13-8a7f-4be0-9bb1-4c0608e35220)
