@@ -85,8 +85,18 @@ Then, I used the Properties window to explore details for tables and columns.
 
 ![properties 2](https://github.com/user-attachments/assets/e2d1fb13-8a7f-4be0-9bb1-4c0608e35220)
 
-I then ran simple TOP (20) queries on tables from the Production schema to quickly preview the data and validate table contents.
+I then ran simple TOP (20) queries on tables from the Production schema to quickly preview the data and validate table contents:
 
 ![production basiq queries](https://github.com/user-attachments/assets/318b4543-477c-4e1a-97d8-e9a0e7bde378)
 
 ![production basic queries2](https://github.com/user-attachments/assets/89852b0e-0826-4174-a477-98ce554a4ce7)
+
+I applied the same exploratory queries to the Sales schema to review transactional tables:
+
+![sales basic queries](https://github.com/user-attachments/assets/da178e8b-d4a7-47ae-8c03-21e829cec892)
+
+![sales basic queries2](https://github.com/user-attachments/assets/d6f2d593-0025-4f82-9e56-a11500764b14)
+
+I repeated the process for the HR schema to explore employee and organizational data:
+
+![hr basic queries](https://github.com/user-attachments/assets/7182d7a1-5f1b-4a72-905a-345038a96e5b)
