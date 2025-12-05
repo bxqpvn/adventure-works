@@ -69,7 +69,7 @@ Done! This is how it looks in the Object Explorer window:
 
 ## 3. Database Exploration
 
-In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.
+*In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.*
 
 I started with exploratory SQL queries to review tables across all functional areas.
 
@@ -119,4 +119,4 @@ I followed the same steps for the Purchasing schema to review vendor and procure
 
 
 >[!IMPORTANT]
->This exploration phase helped me understand how the tables connect and prepared the foundation for the more advanced queries in the next section.
+>This step helped me build a clear understanding of the database before moving on to more advanced queries.
