@@ -79,11 +79,13 @@ As a result, I obtained a table listing all tables for each schema.
 
 ![canva schema tables](https://github.com/user-attachments/assets/c08d9b87-ab12-4e75-a239-3f5506e95af6)
 
+
 Then, I used the Properties window to explore details for tables and columns.
 
 ![properties 1](https://github.com/user-attachments/assets/730b2498-a4f6-46d9-85ba-bbca2b4f8bab)
 
 ![properties 2](https://github.com/user-attachments/assets/e2d1fb13-8a7f-4be0-9bb1-4c0608e35220)
+
 
 I then ran simple TOP (20) queries on tables from the Production schema to quickly preview the data and validate table contents:
 
@@ -91,15 +93,18 @@ I then ran simple TOP (20) queries on tables from the Production schema to quick
 
 ![production basic queries2](https://github.com/user-attachments/assets/89852b0e-0826-4174-a477-98ce554a4ce7)
 
+
 I applied the same exploratory queries to the Sales schema to review transactional tables:
 
 ![sales basic queries](https://github.com/user-attachments/assets/da178e8b-d4a7-47ae-8c03-21e829cec892)
 
 ![sales basic queries2](https://github.com/user-attachments/assets/d6f2d593-0025-4f82-9e56-a11500764b14)
 
+
 I repeated the process for the HR schema to explore employee and organizational data:
 
 ![hr basic queries](https://github.com/user-attachments/assets/7182d7a1-5f1b-4a72-905a-345038a96e5b)
+
 
 The same approach was used for the Person schema:
 
@@ -107,9 +112,11 @@ The same approach was used for the Person schema:
 
 ![person basic queries2](https://github.com/user-attachments/assets/cce5f08d-e600-40d3-9c97-b0fadef1b7ff)
 
+
 I followed the same steps for the Purchasing schema to review vendor and procurement data:
 
 ![purchasing basic queries](https://github.com/user-attachments/assets/e210c172-0ac9-4b91-8d71-d0c99e14d3bc)
+
 
 >[!IMPORTANT]
 >This exploration phase helped me understand how the tables connect and prepared the foundation for the more advanced queries in the next section.
