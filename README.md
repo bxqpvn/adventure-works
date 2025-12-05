@@ -1,4 +1,4 @@
-<img width="2560" height="1032" alt="person basic queries" src="https://github.com/user-attachments/assets/f5c908e9-057a-48cb-9e38-8e91452dffff" />![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
+![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
 
 ***AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
 
