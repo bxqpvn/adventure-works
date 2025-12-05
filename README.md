@@ -1,4 +1,4 @@
-![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
+<img width="2560" height="1032" alt="person basic queries" src="https://github.com/user-attachments/assets/f5c908e9-057a-48cb-9e38-8e91452dffff" />![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
 
 ***AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
 
@@ -100,3 +100,16 @@ I applied the same exploratory queries to the Sales schema to review transaction
 I repeated the process for the HR schema to explore employee and organizational data:
 
 ![hr basic queries](https://github.com/user-attachments/assets/7182d7a1-5f1b-4a72-905a-345038a96e5b)
+
+The same approach was used for the Person schema:
+
+![person basic queries](https://github.com/user-attachments/assets/1abf1ad7-4810-4901-912a-d2a0e86c3bab)
+
+![person basic queries2](https://github.com/user-attachments/assets/cce5f08d-e600-40d3-9c97-b0fadef1b7ff)
+
+I followed the same steps for the Purchasing schema to review vendor and procurement data:
+
+![purchasing basic queries](https://github.com/user-attachments/assets/e210c172-0ac9-4b91-8d71-d0c99e14d3bc)
+
+>[!IMPORTANT]
+>This exploration phase helped me understand how the tables connect and prepared the foundation for the more advanced queries in the next section.
