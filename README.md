@@ -1,3 +1,4 @@
+![SSMS 22](https://img.shields.io/badge/SSMS-22-blue) ![SQL Server](https://img.shields.io/badge/SQL%20Server-blue)
 ![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
 
 ***AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
