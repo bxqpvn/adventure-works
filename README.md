@@ -124,3 +124,26 @@ I followed the same steps for the Purchasing schema to review vendor and procure
 ## 4. Advanced SQL Queries & Insights
 
 *Here, I perform advanced SQL queries to uncover meaningful insights from the data, using filtering and analytics techniques to answer specific business questions.*
+
+**Initially, I focused on the Production tables:**
+
+```sql
+use AdventureWorks2022
+
+select
+	p.ProductID,
+	p.Name as ProductName,
+	c.Name as Category,
+	sc.Name as Subcategory
+from Production.Product p
+left join Production.ProductSubcategory sc
+	on p.ProductSubcategoryID = sc.ProductSubcategoryID
+left join Production.ProductCategory c
+	on sc.ProductCategoryID = c.ProductCategoryID
+-- where c.name is not null
+```
+This query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using LEFT JOINs, ensuring that all products are included even if some do not have a subcategory or category assigned.
+
+As a result, I obtained the following table:
+
+![product + category + subcategory](https://github.com/user-attachments/assets/681c63a0-bd36-4154-a851-9bbf840c0317)
