@@ -120,3 +120,7 @@ I followed the same steps for the Purchasing schema to review vendor and procure
 
 >[!IMPORTANT]
 >This step helped me build a clear understanding of the database before moving on to more advanced queries.
+
+## 4. Advanced SQL Queries & Insights
+
+*Here, I perform advanced SQL queries to uncover meaningful insights from the data, using filtering and analytics techniques to answer specific business questions.*
