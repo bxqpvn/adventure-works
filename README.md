@@ -92,31 +92,13 @@ I then ran simple TOP (20) queries on tables from the Production schema to quick
 
 ![production basiq queries](https://github.com/user-attachments/assets/318b4543-477c-4e1a-97d8-e9a0e7bde378)
 
-![production basic queries2](https://github.com/user-attachments/assets/89852b0e-0826-4174-a477-98ce554a4ce7)
-
 
 I applied the same exploratory queries to the Sales schema to review transactional tables:
 
 ![sales basic queries](https://github.com/user-attachments/assets/da178e8b-d4a7-47ae-8c03-21e829cec892)
 
-![sales basic queries2](https://github.com/user-attachments/assets/d6f2d593-0025-4f82-9e56-a11500764b14)
 
-
-I repeated the process for the HR schema to explore employee and organizational data:
-
-![hr basic queries](https://github.com/user-attachments/assets/7182d7a1-5f1b-4a72-905a-345038a96e5b)
-
-
-The same approach was used for the Person schema:
-
-![person basic queries](https://github.com/user-attachments/assets/1abf1ad7-4810-4901-912a-d2a0e86c3bab)
-
-![person basic queries2](https://github.com/user-attachments/assets/cce5f08d-e600-40d3-9c97-b0fadef1b7ff)
-
-
-I followed the same steps for the Purchasing schema to review vendor and procurement data:
-
-![purchasing basic queries](https://github.com/user-attachments/assets/e210c172-0ac9-4b91-8d71-d0c99e14d3bc)
+I followed the same steps for the HR, Person, and Purchasing schemas to get a quick overview of their datasets.
 
 
 >[!IMPORTANT]
