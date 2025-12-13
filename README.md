@@ -113,20 +113,70 @@ I followed the same steps for the HR, Person, and Purchasing schemas to get a qu
 ```sql
 use AdventureWorks2022
 
-select
-	p.ProductID,
-	p.Name as ProductName,
-	c.Name as Category,
-	sc.Name as Subcategory
-from Production.Product p
-left join Production.ProductSubcategory sc
-	on p.ProductSubcategoryID = sc.ProductSubcategoryID
-left join Production.ProductCategory c
-	on sc.ProductCategoryID = c.ProductCategoryID
--- where c.name is not null
+WITH ProductionCategoryAndSubcategory as
+	(SELECT
+		p.ProductID,
+		p.Name as ProductName,
+		c.Name as Category,
+		sc.Name as Subcategory,
+		StandardCost,
+		ListPrice	
+	FROM Production.Product p
+	left join Production.ProductSubcategory sc				-- Join Product with Category and Subcategory tables
+		ON p.ProductSubcategoryID = sc.ProductSubcategoryID
+	left join Production.ProductCategory c
+		ON sc.ProductCategoryID = c.ProductCategoryID
+),
 ```
-This query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using LEFT JOINs, ensuring that all products are included even if some do not have a subcategory or category assigned.
+This query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
 As a result, I obtained the following table:
 
 ![product + category + subcategory](https://github.com/user-attachments/assets/681c63a0-bd36-4154-a851-9bbf840c0317)
+
+After joining the required tables (as shown in the previous CTE), I calculated **aggregated production metrics** at category level, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
+
+```sql
+CategoryCostAndProfit as
+	(SELECT
+		CASE
+		WHEN Category IS NULL THEN 'Others'				-- Products without assigned category						
+		ELSE Category
+		END AS Category,
+		COUNT(ProductID) as NumberOfProducts,						-- Number of products per category
+		ROUND(AVG(StandardCost),0) AS  AverageStandardCost,			-- Average standard cost per category
+		ROUND(AVG(ListPrice),0) as AverageListPrice,				-- Average list price per category
+		ROUND(SUM(StandardCost),2) AS  TotalCost,
+		ROUND(SUM(ListPrice),2) as TotalPrice,
+		SUM(ListPrice - StandardCost) as TotalProfit,				-- Total profit per category
+		ROUND(SUM(ListPrice - StandardCost) / NULLIF(SUM(ListPrice), 0) * 100, 2) AS ProfitMargin	-- Profit margin (%)
+	FROM ProductionCategoryAndSubcategory
+	GROUP BY Category
+)
+```
+
+A profitability rank was then added using the **RANK() function**, along with a business-oriented profitability flag created through a **CASE expression**.
+
+```sql
+SELECT
+	Category,
+	NumberOfProducts,
+	AverageStandardCost,
+	AverageListPrice,
+	TotalCost,
+	TotalPrice,
+	TotalProfit,
+	ProfitMargin,
+	RANK() OVER (ORDER BY TotalProfit DESC) AS ProfitabilityRank,			-- Ranked the profit using RANK()
+	CASE
+		WHEN TotalProfit > 50000 THEN 'Most Profitable'						-- Profitability flag by profit ranges with CASE
+		WHEN TotalProfit BETWEEN 15000 AND 50000 THEN 'Very Profitable'
+		ELSE 'Profitable'
+		END AS ProfitabilityFlag
+FROM CategoryCostAndProfit
+ORDER BY TotalProfit DESC;
+```
+
+The table below shows the output of this query.
+
+![category-level metrics](https://github.com/user-attachments/assets/0be18770-d343-420c-a99c-534416dcc144)
