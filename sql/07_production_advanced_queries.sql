@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-/* Category-level production metrics query*/
+/* Category-level production metrics query */
 
 WITH ProductionCategoryAndSubcategory as
 	(SELECT
