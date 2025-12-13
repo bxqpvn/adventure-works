@@ -134,7 +134,7 @@ As a result, I obtained the following table:
 
 ![product + category + subcategory](https://github.com/user-attachments/assets/681c63a0-bd36-4154-a851-9bbf840c0317)
 
-After joining the required tables (as shown in the previous CTE), I calculated **aggregated production metrics** at category level, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
+After joining the required tables (as shown in the previous CTE), I calculated ***AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL***, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
 
 ```sql
 CategoryCostAndProfit as
@@ -180,3 +180,54 @@ ORDER BY TotalProfit DESC;
 The table below shows the output of this query.
 
 ![category-level metrics](https://github.com/user-attachments/assets/0be18770-d343-420c-a99c-534416dcc144)
+
+After that, I tried to find the ***TOP 10 MOST EXPENSIVE PRODUCTS***
+
+> [!WARNING]
+> In the first phase, I wrote this query, but the result was not satisfying because it returned a table with the same products repeated, only differing by size/variant. In practice, the columns representing product names and their prices were duplicated.
+>
+> ![top 10 products wrong](https://github.com/user-attachments/assets/bb952c31-c925-4ec4-8a32-2c33a5768df3)
+
+> [!TIP]
+> To fix this, I decided to remove the size/ variant information that appears after the comma, keeping only the base product name.
+> 
+> It was also necessary to add ```DISTINCT``` to eliminate duplicates. Otherwise, the result would have been exactly the same as before.
+> ```sql 
+> DISTINCT LEFT(p.Name, ISNULL(NULLIF(CHARINDEX(',', p.Name), 0) - 1, LEN(p.Name))) AS ProductName
+> 
+> -- "Road-150 Red, 62" becomes "Road-150 Red"
+> ```
+
+> [!IMPORTANT]
+> DISTINCT must be placed inside the CTE.
+> 
+> If we put it in the final query, we get an error because of the TOP 10 clause.
+
+This led me to the following query and the final result shown below:
+
+```sql
+WITH ProductPriceDetails AS (
+	SELECT
+		DISTINCT LEFT(p.Name, ISNULL(NULLIF(CHARINDEX(',', p.Name), 0) - 1, LEN(p.Name))) AS ProductName,	-- Remove size/ variant information after the comma in product names
+		psc.Name AS Subcategory,
+		p.ListPrice,
+		CASE
+			WHEN p.MakeFlag = 1 THEN 'Manufactured in-house'		-- ProductType Flag: Manufactured and Purchased
+			ELSE 'Purchased'
+		END AS ProductType
+	FROM Production.Product p
+	LEFT JOIN Production.ProductSubcategory psc						-- Join the ProductSubcategory table to better understand the product
+		ON p.ProductSubcategoryID = psc.ProductSubcategoryID
+)
+SELECT TOP 10		-- Final selection: top 10 most expensive products
+	ProductName,
+	Subcategory,
+	ListPrice
+FROM ProductPriceDetails
+WHERE ProductType like 'Manufactured%'	-- Use 'Purchased' or 'P%' to get the Top 10 most expensive purchased products
+ORDER BY ListPrice DESC;
+```
+
+On the left side are the Manufactured in-house products, and on the right side the Purchased ones.
+
+![manufactured top 10](https://github.com/user-attachments/assets/9a114386-3827-4965-8886-b062b76e60ae) ![purhcased top 10](https://github.com/user-attachments/assets/c51e606d-3fb5-4601-b24d-79418a598f58)
