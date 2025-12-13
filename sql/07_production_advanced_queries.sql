@@ -1,6 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
 /* Category-level production metrics query*/
+
 WITH ProductionCategoryAndSubcategory as
 	(SELECT
 		p.ProductID,
@@ -48,5 +49,30 @@ SELECT
 		END AS ProfitabilityFlag
 FROM CategoryCostAndProfit
 ORDER BY TotalProfit DESC;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Top 10 most expensive products */
+
+WITH ProductPriceDetails AS (
+	SELECT
+		DISTINCT LEFT(p.Name, ISNULL(NULLIF(CHARINDEX(',', p.Name), 0) - 1, LEN(p.Name))) AS ProductName,	-- Remove size/variant information after the comma in product names
+		psc.Name AS Subcategory,																			-- "Road-150 Red, 62" becomes "Road-150 Red"
+		p.ListPrice,
+		CASE
+			WHEN p.MakeFlag = 1 THEN 'Manufactured in-house'		-- ProductType Flag: Manufactured and Purchased
+			ELSE 'Purchased'
+		END AS ProductType
+	FROM Production.Product p
+	LEFT JOIN Production.ProductSubcategory psc						-- Join the ProductSubcategory table to better understand the product
+		ON p.ProductSubcategoryID = psc.ProductSubcategoryID
+)
+SELECT TOP 10		-- Final selection: top 10 most expensive products
+	ProductName,
+	Subcategory,
+	ListPrice
+FROM ProductPriceDetails
+WHERE ProductType like 'Manufactured%'	-- Use 'Purchased' or 'P%' to get the Top 10 most expensive purchased products
+ORDER BY ListPrice DESC;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
