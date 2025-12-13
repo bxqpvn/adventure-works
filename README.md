@@ -181,6 +181,8 @@ The table below shows the output of this query.
 
 ![category-level metrics](https://github.com/user-attachments/assets/0be18770-d343-420c-a99c-534416dcc144)
 
+*As we can see, the most profitable categories are Bicycles and Components, followed by Clothing, Accessories, and the 'Others' category.*
+
 After that, I tried to find the ***TOP 10 MOST EXPENSIVE PRODUCTS***
 
 > [!WARNING]
@@ -199,9 +201,9 @@ After that, I tried to find the ***TOP 10 MOST EXPENSIVE PRODUCTS***
 > ```
 
 > [!IMPORTANT]
-> DISTINCT must be placed inside the CTE.
+> ```DISTINCT``` must be placed inside the **CTE**.
 > 
-> If we put it in the final query, we get an error because of the TOP 10 clause.
+> If we put it in the final query, we get an error because of the ```TOP 10``` clause.
 
 This led me to the following query and the final result shown below:
 
@@ -228,6 +230,6 @@ WHERE ProductType like 'Manufactured%'	-- Use 'Purchased' or 'P%' to get the Top
 ORDER BY ListPrice DESC;
 ```
 
-On the left side are the Manufactured in-house products, and on the right side the Purchased ones.
-
 ![manufactured top 10](https://github.com/user-attachments/assets/9a114386-3827-4965-8886-b062b76e60ae) ![purhcased top 10](https://github.com/user-attachments/assets/c51e606d-3fb5-4601-b24d-79418a598f58)
+
+*The most expensive manufactured in-house products are, unsurprisingly, the bicycles produced and assembled by AdventureWorks. Among the purchased products, the top includes components, accessories, and clothing.*
