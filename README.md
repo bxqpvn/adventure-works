@@ -132,7 +132,7 @@ This query retrieves a list of products along with their corresponding categorie
 
 As a result, I obtained the following table:
 
-![product + category + subcategory](https://github.com/user-attachments/assets/681c63a0-bd36-4154-a851-9bbf840c0317)
+![product + category + subcategory](https://github.com/user-attachments/assets/50409b9f-a476-4c22-a4ae-50a841f5b99d)
 
 After joining the required tables (as shown in the previous CTE), I calculated ***AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL***, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
 
@@ -229,7 +229,6 @@ FROM ProductPriceDetails
 WHERE ProductType like 'Manufactured%'	-- Use 'Purchased' or 'P%' to get the Top 10 most expensive purchased products
 ORDER BY ListPrice DESC;
 ```
-
-![manufactured top 10](https://github.com/user-attachments/assets/9a114386-3827-4965-8886-b062b76e60ae) ![purhcased top 10](https://github.com/user-attachments/assets/c51e606d-3fb5-4601-b24d-79418a598f58)
+![top 10 products gif bun](https://github.com/user-attachments/assets/18313c59-8d7b-4e5d-b955-c009f9c8af78)
 
 *The most expensive manufactured in-house products are, unsurprisingly, the bicycles produced and assembled by AdventureWorks. Among the purchased products, the top includes components, accessories, and clothing.*
