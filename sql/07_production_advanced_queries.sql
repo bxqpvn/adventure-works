@@ -76,3 +76,18 @@ WHERE ProductType like 'Manufactured%'	-- Use 'Purchased' or 'P%' to get the Top
 ORDER BY ListPrice DESC;
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* Product Ratings */
+
+SELECT
+	Name as ProductName,
+	Rating,
+	ReviewerName,
+	Comments
+FROM Production.Product	p
+LEFT JOIN Production.ProductReview pr
+	on p.ProductID = pr.ProductID
+WHERE Rating is NOT NULL	-- Only 4 products have received a review
+ORDER BY Rating DESC;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
