@@ -232,3 +232,22 @@ ORDER BY ListPrice DESC;
 ![top 10 products gif bun](https://github.com/user-attachments/assets/18313c59-8d7b-4e5d-b955-c009f9c8af78)
 
 *The most expensive manufactured in-house products are, unsurprisingly, the bicycles produced and assembled by AdventureWorks. Among the purchased products, the top includes components, accessories, and clothing.*
+
+The next query presents ***PRODUCT RATINGS***.
+
+```sql
+SELECT
+	Name as ProductName,
+	Rating,
+	ReviewerName,
+	Comments
+FROM Production.Product	p
+LEFT JOIN Production.ProductReview pr
+	on p.ProductID = pr.ProductID
+WHERE Rating is NOT NULL	-- Only 4 products have received a review
+ORDER BY Rating DESC;
+```
+
+This query highlights only products with available ratings by **filtering out NULL values** using the ```WHERE``` clause and ```IS NOT NULL```, and includes reviewer details and comments to provide a qualitative perspective on product performance.
+
+![review table query](https://github.com/user-attachments/assets/025f7aac-c1f4-4a3d-b266-e46f300c4033)
