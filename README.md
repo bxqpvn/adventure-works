@@ -191,12 +191,9 @@ After that, I tried to find the ***TOP 10 MOST EXPENSIVE PRODUCTS***
 > ![top 10 products wrong](https://github.com/user-attachments/assets/bb952c31-c925-4ec4-8a32-2c33a5768df3)
 
 > [!TIP]
-> To fix this, I decided to remove the size/ variant information that appears after the comma, keeping only the base product name.
-> 
-> It was also necessary to add ```DISTINCT``` to eliminate duplicates. Otherwise, the result would have been exactly the same as before.
+> To fix this, I decided to remove the size/variant information that appears after the comma, keeping only the base product name. It was also necessary to add ```DISTINCT``` to eliminate duplicates. Otherwise, the result would have been exactly the same as before.
 > ```sql 
 > DISTINCT LEFT(p.Name, ISNULL(NULLIF(CHARINDEX(',', p.Name), 0) - 1, LEN(p.Name))) AS ProductName
-> 
 > -- "Road-150 Red, 62" becomes "Road-150 Red"
 > ```
 
