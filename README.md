@@ -108,7 +108,16 @@ I followed the same steps for the HR, Person, and Purchasing schemas to get a qu
 
 *Here, I perform advanced SQL queries to uncover meaningful insights from the data, using filtering and analytics techniques to answer specific business questions.*
 
+
 **Initially, I focused on the Production tables:**
+
+First, to identify missing, inconsistent, or potentially invalid values that could impact analytical results, I ran basic ***DATA QUALITY CHECKS***.
+
+![products with value = 0](https://github.com/user-attachments/assets/dc61ad38-5060-459a-a818-c1623764c3ff)
+
+According to the SQL table, 182 purchased products and 18 manufactured products have both production cost and list price recorded as zero.
+
+This next query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
 ```sql
 use AdventureWorks2022
@@ -128,7 +137,6 @@ WITH ProductionCategoryAndSubcategory as
 		ON sc.ProductCategoryID = c.ProductCategoryID
 ),
 ```
-This query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
 As a result, I obtained the following table:
 
