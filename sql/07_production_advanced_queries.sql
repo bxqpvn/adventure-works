@@ -1,4 +1,27 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------
+/* Data Quality Checks */
+
+--
+WITH CostAndPriceFlag AS (
+	SELECT
+		ProductID,
+		Name as ProductName,
+		StandardCost,
+		ListPrice,
+		MakeFlag,			-- 0 = Product is purchased, 1 = Product is manufactured in-house.
+		CASE
+			WHEN StandardCost = 0 AND ListPrice = 0 THEN 1	-- Products with both StandardCost and ListPrice equal to 0 are flagged as 1
+		ELSE 0
+		END AS ZeroPriceFlag
+	FROM Production.Product
+)
+SELECT DISTINCT
+	(SELECT COUNT(ProductID) FROM CostAndPriceFlag WHERE MakeFlag = 1 and ZeroPriceFlag = 1) as ManufacturedProducts,
+	(SELECT COUNT(ProductID) FROM CostAndPriceFlag WHERE MakeFlag = 0 and ZeroPriceFlag = 1) as PurchasedProducts
+FROM CostAndPriceFlag;
+-- The query above returns the number of products with a production cost and list price equal to 0
+
+------------------------------------------------------------------------------------------------------------------------------------------------
 
 /* Category-level production metrics query */
 
