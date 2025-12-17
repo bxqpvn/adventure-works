@@ -88,7 +88,7 @@ Then, I used the Properties window to explore details for tables and columns.
 ![properties 2](https://github.com/user-attachments/assets/e2d1fb13-8a7f-4be0-9bb1-4c0608e35220)
 
 
-I then ran simple TOP (20) queries on tables from the Production schema to quickly preview the data and validate table contents:
+I then ran simple ```TOP (20)``` queries on tables from the Production schema to quickly preview the data and validate table contents:
 
 ![production basiq queries](https://github.com/user-attachments/assets/318b4543-477c-4e1a-97d8-e9a0e7bde378)
 
