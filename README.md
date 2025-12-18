@@ -17,7 +17,7 @@
 >
 >Power BI Desktop – Building the dashboard based on SQL insights
 
-## 1. Connecting to the AdventureWorks Database
+# 1. Connecting to the AdventureWorks Database
 
 I restored the AdventureWorks2022 sample database in SSMS following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):
 
@@ -37,27 +37,27 @@ I restored the AdventureWorks2022 sample database in SSMS following the official
 
 ![connection restored succesfully](https://github.com/user-attachments/assets/fb6aca1c-09c2-4d23-865e-27432ac7bffa)
 
-## 2. Database Diagrams
+# 2. Database Diagrams
 
 To better understand the structure of the AdventureWorks database, I created diagrams for each major functional areas:
 
-- **Production**
+### Production
 
 ![production diagram](https://github.com/user-attachments/assets/37165444-0abf-4e05-8d3a-06c7db46be77)
 
-- **Sales**
+### Sales
 
 ![sales diagram](https://github.com/user-attachments/assets/2700a126-94cf-4c09-811f-261971652935)
 
-- **Human Resources**
+### Human Resources
 
 ![HR diagram](https://github.com/user-attachments/assets/1b894189-4998-4228-8242-b0a256c95fb1)
 
-- **Person**
+### Person
 
 ![person diagram](https://github.com/user-attachments/assets/425e89c7-d78e-46d5-b86b-3e2fabb6f939)
 
-- **Purchasing**
+### Purchasing
 
 ![purchasing diagram](https://github.com/user-attachments/assets/8a9e729c-74b0-44d3-8541-071380b337e0)
 
@@ -68,7 +68,7 @@ Done! This is how it looks in the Object Explorer window:
 >[!IMPORTANT]
 >By showing table relationships (PK–FK) and the overall schema structure, these diagrams serve as a foundation for the SQL queries covered in the next section.
 
-## 3. Database Exploration
+# 3. Database Exploration
 
 *In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.*
 
@@ -104,18 +104,22 @@ I followed the same steps for the HR, Person, and Purchasing schemas to get a qu
 >[!IMPORTANT]
 >This step helped me build a clear understanding of the database before moving on to more advanced queries.
 
-## 4. Advanced SQL Queries & Insights
+# 4. Advanced SQL Queries & Insights
 
 *Here, I perform advanced SQL queries to uncover meaningful insights from the data, using filtering and analytics techniques to answer specific business questions.*
 
 
 **Initially, I focused on the Production tables:**
 
-First, to identify missing, inconsistent, or potentially invalid values that could impact analytical results, I ran basic ***DATA QUALITY CHECKS***.
+### DATA QUALITY CHECKS
+
+First, to identify missing, inconsistent, or potentially invalid values that could impact analytical results, I ran basic **data quality checks**.
 
 ![products with value = 0](https://github.com/user-attachments/assets/dc61ad38-5060-459a-a818-c1623764c3ff)
 
 According to the SQL table, 182 purchased products and 18 manufactured products have both production cost and list price recorded as zero.
+
+### AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
 
 This next query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
@@ -142,7 +146,7 @@ As a result, I obtained the following table:
 
 ![product + category + subcategory](https://github.com/user-attachments/assets/50409b9f-a476-4c22-a4ae-50a841f5b99d)
 
-After joining the required tables (as shown in the previous CTE), I calculated ***AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL***, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
+After joining the required tables (as shown in the previous CTE), I calculated **aggregated production metrics at category-level**, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
 
 ```sql
 CategoryCostAndProfit as
@@ -163,7 +167,7 @@ CategoryCostAndProfit as
 )
 ```
 
-A profitability rank was then added using the **RANK() function**, along with a business-oriented profitability flag created through a **CASE expression**.
+A profitability rank was then added using the **```RANK()``` function**, along with a business-oriented profitability flag created through a **```CASE``` expression**.
 
 ```sql
 SELECT
@@ -191,7 +195,7 @@ The table below shows the output of this query.
 
 *As we can see, the most profitable categories are Bicycles and Components, followed by Clothing, Accessories, and the 'Others' category.*
 
-After that, I tried to find the ***TOP 10 MOST EXPENSIVE PRODUCTS***
+### TOP 10 MOST EXPENSIVE PRODUCTS
 
 > [!WARNING]
 > In the first phase, I wrote this query, but the result was not satisfying because it returned a table with the same products repeated, only differing by size/variant. In practice, the columns representing product names and their prices were duplicated.
@@ -238,7 +242,9 @@ ORDER BY ListPrice DESC;
 
 *The most expensive manufactured in-house products are, unsurprisingly, the bicycles produced and assembled by AdventureWorks. Among the purchased products, the top includes components, accessories, and clothing.*
 
-The next query presents ***PRODUCT RATINGS***.
+### PRODUCT RATINGS
+
+This query highlights only products with available ratings by **filtering out NULL values** using the ```WHERE``` clause and ```IS NOT NULL```, and includes reviewer details and comments to provide a qualitative perspective on product performance.
 
 ```sql
 SELECT
@@ -252,7 +258,5 @@ LEFT JOIN Production.ProductReview pr
 WHERE Rating is NOT NULL	-- Only 4 products have received a review
 ORDER BY Rating DESC;
 ```
-
-This query highlights only products with available ratings by **filtering out NULL values** using the ```WHERE``` clause and ```IS NOT NULL```, and includes reviewer details and comments to provide a qualitative perspective on product performance.
 
 ![review table query](https://github.com/user-attachments/assets/025f7aac-c1f4-4a3d-b266-e46f300c4033)
