@@ -1,8 +1,9 @@
-------------------------------------------------------------------------------------------------------------------------------------------------
+--==============================================================================================================================================
 
 /* Data Quality Checks */
 
---
+------------------------------------------------------------------------------------------------------------------------------------------------
+-- How many products have a production cost and list price equal to 0? -------------------------------------------------------------------------
 WITH CostAndPriceFlag AS (
 	SELECT
 		ProductID,
@@ -20,9 +21,40 @@ SELECT DISTINCT
 	(SELECT COUNT(ProductID) FROM CostAndPriceFlag WHERE MakeFlag = 1 and ZeroPriceFlag = 1) as ManufacturedProducts,
 	(SELECT COUNT(ProductID) FROM CostAndPriceFlag WHERE MakeFlag = 0 and ZeroPriceFlag = 1) as PurchasedProducts
 FROM CostAndPriceFlag;
--- The query above returns the number of products with a production cost and list price equal to 0
-
 ------------------------------------------------------------------------------------------------------------------------------------------------
+-- How many products are missing a color? ------------------------------------------------------------------------------------------------------
+-- How many products are missing size information? ---------------------------------------------------------------------------------------------
+-- How many products are not linked to a product model? ----------------------------------------------------------------------------------------
+WITH MissingAttributes as (
+	SELECT
+		CASE WHEN Color IS NULL THEN 1 ELSE 0 END as ColorFlag,
+		CASE WHEN Size IS NULL THEN 1 ELSE 0 END as SizeFlag,
+		CASE WHEN ProductModelID IS NULL THEN 1 ELSE 0 END as ModelFlag
+	FROM Production.Product
+)
+SELECT
+	(SELECT SUM(ColorFlag) FROM MissingAttributes WHERE ColorFlag = 1) as ColorMissing,
+	(SELECT SUM(SizeFlag) FROM MissingAttributes WHERE SizeFlag = 1) as SizeMissing,
+	(SELECT SUM(ModelFlag) FROM MissingAttributes WHERE ModelFlag = 1) as ModelMissing;
+------------------------------------------------------------------------------------------------------------------------------------------------
+-- How many products are not linked to a category / subcategory? -------------------------------------------------------------------------------
+WITH ProductsNullColumns as (
+	SELECT
+		CASE WHEN c.Name IS NULL THEN 1 ELSE 0 END as CategoryFlag,
+		CASE WHEN sc.Name IS NULL THEN 1 ELSE 0 END as SubcategoryFlag	
+	FROM Production.Product p
+		left join Production.ProductSubcategory sc
+			ON p.ProductSubcategoryID = sc.ProductSubcategoryID
+		left join Production.ProductCategory c
+			ON sc.ProductCategoryID = c.ProductCategoryID
+)
+SELECT
+	SUM(CategoryFlag) as NullCategory,
+	SUM(SubcategoryFlag) as NullSubcategory
+From ProductsNullColumns;
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+--==============================================================================================================================================
 
 /* Category-level production metrics query */
 
@@ -74,7 +106,7 @@ SELECT
 FROM CategoryCostAndProfit
 ORDER BY TotalProfit DESC;
 
-------------------------------------------------------------------------------------------------------------------------------------------------
+--==============================================================================================================================================
 
 /* Top 10 most expensive products */
 
@@ -99,7 +131,7 @@ FROM ProductPriceDetails
 WHERE ProductType like 'Manufactured%'	-- Use 'Purchased' or 'P%' to get the Top 10 most expensive purchased products
 ORDER BY ListPrice DESC;
 
-------------------------------------------------------------------------------------------------------------------------------------------------
+--==============================================================================================================================================
 
 /* Product Ratings */
 
