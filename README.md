@@ -129,6 +129,12 @@ Before analysis, I defined a few data quality questions to identify missing or i
 
  - How many products are not linked to a category / subcategory?
 
+![null columns](https://github.com/user-attachments/assets/9bb8c2bf-c5e6-487a-86af-0e7bb8a5c116)
+
+*Since categories are assigned through subcategories, products without a subcategory are also not linked to any category. This check identifies such unclassified products.*
+
+> [!TIP]
+> When using CTEs with aggregate values, avoid adding a final `FROM` clause. Doing so repeats results across rows and forces the use of `DISTINCT`. Without it, the query returns only the aggregated values once, eliminating duplication.
 
 ### AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
 
