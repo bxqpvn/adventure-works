@@ -113,11 +113,22 @@ I followed the same steps for the HR, Person, and Purchasing schemas to get a qu
 
 ### DATA QUALITY CHECKS
 
-First, to identify missing, inconsistent, or potentially invalid values that could impact analytical results, I ran basic **data quality checks**.
+Before analysis, I defined a few data quality questions to identify missing or incomplete product attributes:
+
+ - How many products have a production cost and list price equal to 0?
 
 ![products with value = 0](https://github.com/user-attachments/assets/dc61ad38-5060-459a-a818-c1623764c3ff)
 
-According to the SQL table, 182 purchased products and 18 manufactured products have both production cost and list price recorded as zero.
+*According to the SQL table, 182 purchased products and 18 manufactured products have both production cost and list price recorded as zero.*
+ 
+ - How many products are missing a color?
+ - How many products are missing size information?
+ - How many products are not linked to a product model?
+
+![missing attributes](https://github.com/user-attachments/assets/34a69260-4505-4d8a-bcf5-57dee5d88573)
+
+ - How many products are not linked to a category / subcategory?
+
 
 ### AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
 
