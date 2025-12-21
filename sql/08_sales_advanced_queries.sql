@@ -57,3 +57,27 @@ SELECT							-- Use LAG() to compare sales with previous year
 FROM YoYLag;
 
 --==============================================================================================================================================
+
+/* Average Order Value by Territory */
+
+WITH AddTerritory AS (
+	SELECT
+		YEAR(OrderDate) as DateYear,			-- Extract year from order date
+		SalesOrderID,
+		TotalDue,
+		st.Name as Territory
+	FROM Sales.SalesOrderHeader soh
+	LEFT JOIN Sales.SalesTerritory st			-- Join SalesTerritory to add territory names
+		ON soh.TerritoryID = st.TerritoryID
+)
+SELECT
+	Territory,
+	COUNT(DISTINCT SalesOrderID) as OrderCount,						-- Number of orders per territory
+	ROUND(SUM(TotalDue), 2) as TotalSales,							-- Total sales per territory
+	ROUND(SUM(TotalDue) / COUNT(DISTINCT SalesOrderID), 0) as AOV	-- Average Order Value per Territory
+FROM AddTerritory
+WHERE DateYear = 2014			-- Filter to analyze a single year for better comparability
+GROUP BY Territory
+ORDER BY AOV DESC;
+
+--==============================================================================================================================================
