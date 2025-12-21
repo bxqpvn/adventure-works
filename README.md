@@ -314,9 +314,9 @@ SELECT							-- Calculate absolute and percentage Month-over-Month growth
 FROM MoMLag;
 
 ```
-![MoM gif](https://github.com/user-attachments/assets/5f2dce6e-451b-4cf0-b8b2-3faf119b57d8)
+This shows how total sales change from one month to the next:
 
-_This shows how total sales change from one month to the next._
+![MoM gif](https://github.com/user-attachments/assets/5f2dce6e-451b-4cf0-b8b2-3faf119b57d8)
 
 
 
@@ -346,9 +346,23 @@ SELECT							-- Use LAG() to compare sales with previous year
 FROM YoYLag;
 
 ```
+
+This query compares total sales by year to highlight long-term growth trends while reducing the impact of seasonality:
+
 ![YoY](https://github.com/user-attachments/assets/c8347bea-46c5-483c-9c53-8bd59a2d2023)
 
-_This query compares total sales by year to highlight long-term growth trends while reducing the impact of seasonality._
+
 
 > [!IMPORTANT]
 > I **extracted time components** from the order date and **aggregated total sales** at monthly and yearly levels. Using the `LAG()` **window function**, I compared each period’s sales with the previous one to calculate both **Month-over-Month** and **Year-over-Year** changes, while `NULLIF()` was applied to safely compute growth percentages and avoid division by zero.
+
+### AVERAGE ORDER VALUE BY REGION
+
+This query calculates **Average Order Value by territory** for a selected year by **aggregating total sales** and **order counts**, providing a clearer comparison of purchasing behavior across regions.
+
+![aov gif](https://github.com/user-attachments/assets/dbd0bee6-e95b-4568-bf73-b1024a5ace8d)
+
+_In 2014, territories like Central, Northeast, and Southeast had the highest average order values, indicating fewer but more valuable transactions, while regions such as Australia, Germany, and Canada showed lower AOVs despite high order volumes suggesting a high-volume, low-value sales model. This query can be easily adapted to analyze trends from 2011 to 2014 by adjusting the year filter._
+
+> [!TIP]
+> Using a `WHERE` clause to filter by year is essential to keep the results comparable and meaningful.
