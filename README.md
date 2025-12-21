@@ -277,3 +277,28 @@ ORDER BY Rating DESC;
 ```
 
 ![review table query](https://github.com/user-attachments/assets/025f7aac-c1f4-4a3d-b266-e46f300c4033)
+
+**Next, I focused on the Sales functional area.**
+
+### MONTH-OVER-MONTH AND YEAR-OVER-YEAR SALES
+
+I started by analyzing **MoM sales performance** to understand short-term **sales trends** and fluctuations.
+
+```sql
+
+```
+
+_This shows how total sales change from one month to the next._
+
+
+
+To complement the MoM analysis, I also calculated **YoY sales growth**.
+
+```sql
+
+```
+
+_This query compares total sales by year to highlight long-term growth trends while reducing the impact of seasonality._
+
+> [!IMPORTANT]
+> I **extracted time components** from the order date and **aggregated total sales** at monthly and yearly levels. Using the `LAG()` **window function**, I compared each period’s sales with the previous one to calculate both **Month-over-Month** and **Year-over-Year** changes, while `NULLIF()` was applied to safely compute growth percentages and avoid division by zero.
