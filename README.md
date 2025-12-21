@@ -285,8 +285,36 @@ ORDER BY Rating DESC;
 I started by analyzing **MoM sales performance** to understand short-term **sales trends** and fluctuations.
 
 ```sql
+WITH YearMonthExtract AS (		-- Extract year-month from order date and keep total sales value
+	SELECT
+		FORMAT(OrderDate, 'yyyy-MM') AS YearMonth,
+		TotalDue
+	FROM Sales.SalesOrderHeader
+),
+MoMSales AS (					-- Aggregate total sales per month
+	SELECT
+		YearMonth,
+		ROUND(SUM(TotalDue), 0) AS TotalSales
+	FROM YearMonthExtract
+	GROUP BY YearMonth
+),
+MoMLag AS (						-- Use LAG() to get previous month's total sales
+	SELECT
+		YearMonth,
+		TotalSales,
+		LAG(TotalSales, 1) OVER (ORDER BY YearMonth) AS TotalSalesLag
+	FROM MoMSales
+)
+SELECT							-- Calculate absolute and percentage Month-over-Month growth
+	YearMonth,
+	TotalSales,
+	TotalSalesLag,
+	TotalSales - TotalSalesLag AS [MoM Sales Difference],
+	ROUND(((TotalSales - TotalSalesLag) / NULLIF(TotalSalesLag, 0)) * 100, 2) AS [MoM Growth (%)]
+FROM MoMLag;
 
 ```
+![MoM gif](https://github.com/user-attachments/assets/5f2dce6e-451b-4cf0-b8b2-3faf119b57d8)
 
 _This shows how total sales change from one month to the next._
 
@@ -295,8 +323,30 @@ _This shows how total sales change from one month to the next._
 To complement the MoM analysis, I also calculated **YoY sales growth**.
 
 ```sql
+WITH YoYSales AS (				-- Aggregate total sales per year
+	SELECT
+		YEAR(OrderDate) AS DateYear,
+		ROUND(SUM(TotalDue), 0) AS TotalSales
+	FROM Sales.SalesOrderHeader
+	GROUP BY YEAR(OrderDate)
+),
+YoYLag AS (						-- Use LAG() to compare sales with previous year
+	SELECT
+		DateYear,
+		TotalSales,
+		LAG(TotalSales, 1) OVER (ORDER BY DateYear) AS TotalSalesLag
+	FROM YoYSales
+)
+SELECT							-- Use LAG() to compare sales with previous year
+	DateYear,
+	TotalSales,
+	TotalSalesLag,
+	TotalSales - TotalSalesLag AS [YoY Sales Difference],
+	ROUND(((TotalSales - TotalSalesLag) / NULLIF(TotalSalesLag, 0)) * 100, 2) AS [YoY Growth (%)]
+FROM YoYLag;
 
 ```
+![YoY](https://github.com/user-attachments/assets/c8347bea-46c5-483c-9c53-8bd59a2d2023)
 
 _This query compares total sales by year to highlight long-term growth trends while reducing the impact of seasonality._
 
