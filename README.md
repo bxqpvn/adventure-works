@@ -366,3 +366,41 @@ _In 2014, territories like Central, Northeast, and Southeast had the highest ave
 
 > [!TIP]
 > Using a `WHERE` clause to filter by year is essential to keep the results comparable and meaningful.
+
+### RUNNING TOTAL OF MONTHLY SALES
+
+This query calculates **monthly total sales** and a **Running Total** over time by first aggregating sales at a monthly level and then applying a **window function** to track how sales accumulate across the full period.
+
+![running total 3 gif](https://github.com/user-attachments/assets/ca96dd59-29ae-48e7-a668-a68fc53d2d27)
+
+```sql
+WITH YearMonthExtract AS (                                 -- Extract year and month from OrderDate using FORMAT()
+    SELECT
+        FORMAT(OrderDate, 'yyyy-MM') AS YearMonth,
+        TotalDue
+    FROM Sales.SalesOrderHeader
+),
+MonthlySales AS (                                         -- Aggregate sales to calculate total monthly revenue
+    SELECT
+        YearMonth,
+        SUM(TotalDue) AS TotalSales
+    FROM YearMonthExtract
+    GROUP BY YearMonth
+),
+SalesRunningTotal AS (                                    -- Calculate running total of monthly sales
+    SELECT
+        YearMonth,
+        TotalSales,
+        SUM(TotalSales) OVER (
+            ORDER BY YearMonth ASC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW -- Includes all previous months up to the current one to compute cumulative sales over time
+        ) AS RunningTotal
+    FROM MonthlySales
+)
+SELECT                                                     -- Final result with rounded values for better readability
+    YearMonth,
+    ROUND(TotalSales, 2) AS TotalSales,
+    ROUND(RunningTotal, 2) AS RunningTotal
+FROM SalesRunningTotal;
+
+```
