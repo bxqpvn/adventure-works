@@ -404,3 +404,10 @@ SELECT                                                     -- Final result with 
 FROM SalesRunningTotal;
 
 ```
+> [!TIP]
+> Instead of using `FORMAT(OrderDate, 'yyyy-MM')`, you can use `DATEFROMPARTS(YEAR(OrderDate), MONTH(OrderDate), 1)` to keep the column as a proper date `(YYYY-MM-01)`.
+
+> [!CAUTION]
+> When calculating a running total, always specify `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` in the window frame. Without it, SQL Server may default to a RANGE frame and raise an error when ordering by formatted date values.
+> 
+> <img width="1411" height="90" alt="error runn tot" src="https://github.com/user-attachments/assets/7f8a1a76-5ee9-449e-89bb-cbc1d8fe27f1" />
