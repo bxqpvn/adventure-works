@@ -81,3 +81,36 @@ GROUP BY Territory
 ORDER BY AOV DESC;
 
 --==============================================================================================================================================
+
+/* Running Total of Monthly Sales */
+
+WITH YearMonthExtract AS (                                 -- Extract year and month from OrderDate using FORMAT()
+    SELECT
+        FORMAT(OrderDate, 'yyyy-MM') AS YearMonth,
+        TotalDue
+    FROM Sales.SalesOrderHeader
+),
+MonthlySales AS (                                         -- Aggregate sales to calculate total monthly revenue
+    SELECT
+        YearMonth,
+        SUM(TotalDue) AS TotalSales
+    FROM YearMonthExtract
+    GROUP BY YearMonth
+),
+SalesRunningTotal AS (                                    -- Calculate running total of monthly sales
+    SELECT
+        YearMonth,
+        TotalSales,
+        SUM(TotalSales) OVER (
+            ORDER BY YearMonth ASC
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW -- Includes all previous months up to the current one to compute cumulative sales over time
+        ) AS RunningTotal
+    FROM MonthlySales
+)
+SELECT                                                     -- Final result with rounded values for better readability
+    YearMonth,
+    ROUND(TotalSales, 2) AS TotalSales,
+    ROUND(RunningTotal, 2) AS RunningTotal
+FROM SalesRunningTotal;
+
+--==============================================================================================================================================
