@@ -418,6 +418,10 @@ In this section, I joined multiple tables from different functional areas, speci
 
 The objective was to identify which product categories generate the highest revenue.
 
+Before writing the queries, I created a simple diagram to understand the tables and their primary and foreign key relationships:
+
+<img width="1420" height="808" alt="image" src="https://github.com/user-attachments/assets/b5460d6e-34a9-4a32-ac5e-c78e77136dd4" />
+
 First, I joined one table from the Sales area with three tables from Production, linking sales records to products, subcategories, and finally product categories.
 
 ```sql
