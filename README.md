@@ -411,3 +411,45 @@ FROM SalesRunningTotal;
 > When calculating a running total, always specify `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` in the window frame. Without it, SQL Server may default to a RANGE frame and raise an error when ordering by formatted date values.
 > 
 > <img width="1411" height="90" alt="error runn tot" src="https://github.com/user-attachments/assets/7f8a1a76-5ee9-449e-89bb-cbc1d8fe27f1" />
+
+### SALES PER CATEGORY
+
+In this section, I joined multiple tables from different functional areas, specifically *Sales* and *Production*, to analyze **Total Sales by Product Category**. 
+
+The objective was to identify which product categories generate the highest revenue.
+
+First, I joined one table from the Sales area with three tables from Production, linking sales records to products, subcategories, and finally product categories.
+
+```sql
+WITH SalesPerCategory AS (
+    SELECT
+        pc.Name AS Category,          -- Product category name
+        sod.LineTotal                 -- Revenue at product (order line) level
+    FROM Sales.SalesOrderDetail sod
+    LEFT JOIN Production.Product p
+        ON sod.ProductID = p.ProductID
+    LEFT JOIN Production.ProductSubcategory ps
+        ON p.ProductSubcategoryID = ps.ProductSubcategoryID
+    LEFT JOIN Production.ProductCategory pc
+        ON ps.ProductCategoryID = pc.ProductCategoryID
+)
+
+```
+
+In the final query, I aggregated total sales per category by grouping on category name and rounding the results for clarity.
+
+```sql
+SELECT
+    Category,
+    ROUND(SUM(LineTotal), 2) AS TotalSales   -- Total sales per category
+FROM SalesPerCategory
+GROUP BY Category
+ORDER BY TotalSales DESC;
+
+```
+
+Query results:
+
+<img width="1692" height="184" alt="image" src="https://github.com/user-attachments/assets/dd21a8e6-b350-42ba-93f9-f13a7ad187f3" />
+
+*From the results, Bikes clearly generate the highest total sales, while Accessories rank last in terms of revenue.*
