@@ -114,3 +114,26 @@ SELECT                                                     -- Final result with 
 FROM SalesRunningTotal;
 
 --==============================================================================================================================================
+
+/* Total Sales per Category */	-- Sales + Production
+
+WITH SalesPerCategory AS (
+    SELECT
+        pc.Name AS Category,          -- Product category name
+        sod.LineTotal                 -- Revenue at product (order line) level
+    FROM Sales.SalesOrderDetail sod
+    LEFT JOIN Production.Product p
+        ON sod.ProductID = p.ProductID
+    LEFT JOIN Production.ProductSubcategory ps
+        ON p.ProductSubcategoryID = ps.ProductSubcategoryID
+    LEFT JOIN Production.ProductCategory pc
+        ON ps.ProductCategoryID = pc.ProductCategoryID
+)
+SELECT
+    Category,
+    ROUND(SUM(LineTotal), 2) AS TotalSales   -- Total sales per category
+FROM SalesPerCategory
+GROUP BY Category
+ORDER BY TotalSales DESC;
+
+--==============================================================================================================================================
