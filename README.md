@@ -453,3 +453,9 @@ Query results:
 <img width="1692" height="184" alt="image" src="https://github.com/user-attachments/assets/dd21a8e6-b350-42ba-93f9-f13a7ad187f3" />
 
 *From the results, Bikes clearly generate the highest total sales, while Accessories rank last in terms of revenue.*
+
+>[!TIP]
+>
+> `LineTotal` from `SalesOrderDetail` was used instead of `TotalDue` from `SalesOrderHeader` to ensure accurate product-level revenue and avoid double counting multi-category orders.
+>
+> Although `LEFT JOIN`s are used to preserve all sales records, the dataset **does not contain sold products without a category**, so no `NULL` categories appear in the results.
