@@ -464,7 +464,7 @@ Query results:
 >
 > Although `LEFT JOIN`s are used to preserve all sales records, the dataset **does not contain sold products without a category**, so no `NULL` categories appear in the results.
 
-**After completing the Sales analysis, the focus moves to the Human Resources functional area.**
+**After completing the Sales analysis, the focus moves to the Human Resources.**
 
 ### EMPLOYEE AGE AND TENURE ANALYSIS
 
