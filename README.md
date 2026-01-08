@@ -463,3 +463,69 @@ Query results:
 > `LineTotal` from `SalesOrderDetail` was used instead of `TotalDue` from `SalesOrderHeader` to ensure accurate product-level revenue and avoid double counting multi-category orders.
 >
 > Although `LEFT JOIN`s are used to preserve all sales records, the dataset **does not contain sold products without a category**, so no `NULL` categories appear in the results.
+
+**After completing the Sales analysis, the focus moves to the Human Resources functional area.**
+
+### EMPLOYEE AGE AND TENURE ANALYSIS
+
+**This query analyzes Employee Age and Tenure** using data from the **HR functional area**, providing insights into workforce stability and experience by calculating each employee’s current age and number of years spent in the company.
+
+
+
+In the first step, the `LoginID` is processed to extract a readable employee name by removing the domain prefix and any trailing numeric characters, while also selecting the relevant HR attributes:
+
+```sql
+WITH CleanNames AS (
+    SELECT 
+        RIGHT(LoginID, LEN(LoginID) - CHARINDEX('\', LoginID)) AS RawName,	-- Extract employee name from LoginID by keeping the part after the domain separator '\'
+        JobTitle,
+        BirthDate,
+        HireDate
+    FROM HumanResources.Employee
+),
+
+```
+
+<img width="2128" height="190" alt="image" src="https://github.com/user-attachments/assets/d248aa74-725b-4a48-ad2d-541b0dae7e68" />
+
+
+
+Next, numeric suffixes are removed from employee names (if present), ensuring cleaner and more consistent naming:
+
+```sql
+TrimmedNames AS (
+    SELECT
+        CASE 													-- Remove trailing numeric characters from employee names (name1 → name)
+            WHEN PATINDEX('%[0-9]%', REVERSE(RawName)) = 1
+            THEN LEFT(RawName, LEN(RawName) - 1)
+            ELSE RawName
+        END AS NameOnly,
+        JobTitle,
+        BirthDate,
+        HireDate
+    FROM CleanNames
+)
+
+```
+
+<img width="2120" height="187" alt="image" src="https://github.com/user-attachments/assets/6a1de973-7c87-43ee-9801-e8d7d250a132" />
+
+
+
+The final query formats employee names properly and calculates Age and Years in Company using `DATEDIFF`, based on the current date (January 2026):
+
+```sql
+SELECT
+    UPPER(LEFT(NameOnly, 1)) + LOWER(SUBSTRING(NameOnly, 2, LEN(NameOnly))) AS EmployeeName,  -- Format employee name with proper capitalization
+    JobTitle,
+    DATEDIFF(year, BirthDate, CURRENT_TIMESTAMP) AS Age,                                      -- Calculate employee age based on birth date
+    DATEDIFF(year, HireDate, CURRENT_TIMESTAMP) AS YearsInCompany                             -- Calculate number of years spent in the company
+FROM TrimmedNames
+ORDER BY YearsInCompany DESC;        -- Display employees ordered by tenure, from most experienced to least
+
+```
+
+*The results indicate a stable workforce, with employees showing long tenures (13–20 years), suggesting strong employee retention and organizational continuity.*
+
+![hr query gif](https://github.com/user-attachments/assets/9509ab79-a737-483d-8717-a973454b8e6c)
+
