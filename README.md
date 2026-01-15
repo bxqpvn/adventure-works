@@ -529,3 +529,10 @@ ORDER BY YearsInCompany DESC;        -- Display employees ordered by tenure, fro
 
 ![hr query gif](https://github.com/user-attachments/assets/9509ab79-a737-483d-8717-a973454b8e6c)
 
+### VACATION HOURS AND EMPLOYEE COUNT BY DEPARTMENT
+
+**This query analyzes employee vacation hours and employee counts by department**, using only current department assignments for an up-to-date view.
+
+<img width="2086" height="876" alt="image" src="https://github.com/user-attachments/assets/e64ad057-38e7-43ca-a959-1b2fb72f6671" />
+
+*Departments with higher total vacation hours also tend to have larger employee counts.*
