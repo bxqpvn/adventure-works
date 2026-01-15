@@ -536,3 +536,9 @@ ORDER BY YearsInCompany DESC;        -- Display employees ordered by tenure, fro
 <img width="2086" height="876" alt="image" src="https://github.com/user-attachments/assets/e64ad057-38e7-43ca-a959-1b2fb72f6671" />
 
 *Departments with higher total vacation hours also tend to have larger employee counts.*
+
+>[!TIP]
+>
+> `EndDate` indicates when an employee left a department. By applying ```WHERE EndDate IS NULL```, we ensure that only current department assignments are included in the analysis.
+>
+> <img width="1502" height="359" alt="image" src="https://github.com/user-attachments/assets/83efdcb7-7b70-4b5a-8cbf-8e31b8ef2006" />
