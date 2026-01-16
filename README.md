@@ -542,3 +542,85 @@ ORDER BY YearsInCompany DESC;        -- Display employees ordered by tenure, fro
 > `EndDate` indicates when an employee left a department. By applying ```WHERE EndDate IS NULL```, we ensure that only current department assignments are included in the analysis.
 >
 > <img width="1502" height="359" alt="image" src="https://github.com/user-attachments/assets/83efdcb7-7b70-4b5a-8cbf-8e31b8ef2006" />
+
+**Next, I moved to the Person schema.**
+
+**CUSTOMER PROFILE OVERVIEW**
+
+This query builds a **Customer Profile** by formatting full names, identifying middle name presence, and adding customer records with contact and location details.
+
+```sql
+WITH CustomerNames AS (
+    SELECT
+        BusinessEntityID,
+        CASE                       -- Format full name and identify if a middle name exists
+            WHEN MiddleName IS NOT NULL 
+                THEN CONCAT(FirstName, ' ', MiddleName, ' ', LastName)
+            ELSE CONCAT(FirstName, ' ', LastName)
+        END AS FullName,
+        CASE
+            WHEN MiddleName IS NULL THEN 'NO'
+            ELSE 'YES'
+        END AS HasMiddleName,
+        PersonType
+    FROM Person.Person
+),
+
+CustomerContactInfo AS (
+    SELECT                          -- Attach contact details (email and phone number)
+        cn.BusinessEntityID,
+        cn.FullName,
+        cn.HasMiddleName,
+        cn.PersonType,
+        pp.PhoneNumber,
+        ea.EmailAddress
+    FROM CustomerNames cn
+    LEFT JOIN Person.EmailAddress ea        -- LEFT JOIN is used because not all customers have email or phone records
+        ON cn.BusinessEntityID = ea.BusinessEntityID
+    LEFT JOIN Person.PersonPhone pp
+        ON cn.BusinessEntityID = pp.BusinessEntityID
+),
+
+CustomerLocation AS (
+    SELECT                      -- Add geographic information
+        cci.BusinessEntityID,
+        cci.FullName,
+        cci.HasMiddleName,
+        cci.PersonType,
+        cci.PhoneNumber,
+        cci.EmailAddress,
+        cr.Name AS Country,
+        sp.Name AS State,
+        a.City
+    FROM CustomerContactInfo cci
+    LEFT JOIN Person.BusinessEntityAddress bea
+        ON cci.BusinessEntityID = bea.BusinessEntityID
+    LEFT JOIN Person.Address a
+        ON bea.AddressID = a.AddressID
+    LEFT JOIN Person.StateProvince sp
+        ON a.StateProvinceID = sp.StateProvinceID
+    LEFT JOIN Person.CountryRegion cr
+        ON sp.CountryRegionCode = cr.CountryRegionCode
+)
+SELECT                  -- Final query: customer profiles with name, contact, and location details
+    FullName,
+    HasMiddleName,
+    PhoneNumber,
+    EmailAddress,
+    Country,
+    State,
+    City
+FROM CustomerLocation
+WHERE PersonType = 'IN';   -- filter to individual customers only
+
+```
+
+<img width="2001" height="628" alt="image" src="https://github.com/user-attachments/assets/9b89f828-a596-4ed4-813b-ccbab98a1304" />
+
+>[!NOTE]
+>
+> <img width="892" height="22" alt="PersonType" src="https://github.com/user-attachments/assets/19558470-6b8b-4915-94b6-360110f5eb46" />
+
+>[!TIP]
+>
+> Instead of using `CONCAT(FirstName, ' ', MiddleName, ' ', LastName)`, we could use `FirstName + ' ' + MiddleName + ' ' + LastName`, but this must also be handled within a `CASE` expression to avoid `NULL` results.
