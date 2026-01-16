@@ -614,6 +614,7 @@ FROM CustomerLocation
 WHERE PersonType = 'IN';   -- filter to individual customers only
 
 ```
+In the first CTE, I create the full name for each person and check if a middle name exists. Next, I add contact information such as email and phone number. Then, I bring in location details by joining country, state, and city data. In the final step, the query outputs a complete customer profile overview. I obtained the following table:
 
 <img width="2001" height="628" alt="image" src="https://github.com/user-attachments/assets/9b89f828-a596-4ed4-813b-ccbab98a1304" />
 
