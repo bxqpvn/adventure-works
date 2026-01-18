@@ -625,3 +625,13 @@ In the first CTE, I create the full name for each person and check if a middle n
 >[!TIP]
 >
 > Instead of using `CONCAT(FirstName, ' ', MiddleName, ' ', LastName)`, we could use `FirstName + ' ' + MiddleName + ' ' + LastName`, but this must also be handled within a `CASE` expression to avoid `NULL` results.
+
+### TOP 5 CUSTOMERS BY NUMBER OF ORDERS
+
+In this query, I want to see **which customers placed the most orders**, so I focused on the **Top 5 Customers by Number of Orders**.
+
+In the **CTE**, I joined `Sales` and `Person` tables to retrieve order IDs along with each customer’s formatted full name. In the final query, I selected the `TOP 5` customers by counting distinct orders per customer and sorting the results in descending order.
+
+<img width="2030" height="873" alt="image" src="https://github.com/user-attachments/assets/e24621b3-b668-41bb-9e03-c01fd5a40d5c" />
+
+*All customers in the top 5 have a very similar order count, indicating a balanced distribution among the most active customers.*
