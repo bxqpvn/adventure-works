@@ -635,3 +635,57 @@ In the **CTE**, I joined `Sales` and `Person` tables to retrieve order IDs along
 <img width="2030" height="873" alt="image" src="https://github.com/user-attachments/assets/e24621b3-b668-41bb-9e03-c01fd5a40d5c" />
 
 *All customers in the top 5 have a very similar order count, indicating a balanced distribution among the most active customers.*
+
+**Finally, I moved on to the Purchasing.**
+
+### TIME BETWEEN PURCHASES PER VENDOR
+
+In this query, I analyze the time gaps between consecutive purchase orders for each vendor. I start from the `PurchaseOrderHeader` table and join it with the `Vendor` table to bring vendor names alongside purchase dates. Using the `LEAD()` **window function**, I retrieve the next order date for each vendor based on chronological order. Finally, I calculate **The Number of Days Between Purchases** using `DATEDIFF()`, keeping only rows where a next order exists.
+
+```sql
+WITH PurchaseVendors AS (
+    SELECT
+        poh.VendorID,
+        v.Name AS VendorName,
+        poh.PurchaseOrderID,
+        poh.OrderDate
+    FROM Purchasing.PurchaseOrderHeader poh
+    LEFT JOIN Purchasing.Vendor v    -- Join Vendor to retrieve vendor names for each purchase order
+        ON poh.VendorID = v.BusinessEntityID
+),
+PurchaseLead AS (
+    SELECT
+        VendorID,
+        VendorName,
+        PurchaseOrderID,
+        OrderDate,
+        LEAD(OrderDate) OVER (  -- LEAD() returns the next purchase date for the same vendor
+            PARTITION BY VendorID 
+            ORDER BY OrderDate ASC
+        ) AS NextOrderDate
+    FROM PurchaseVendors
+)
+SELECT
+    VendorName,
+    OrderDate,
+    NextOrderDate,
+    DATEDIFF(DAY, OrderDate, NextOrderDate) AS DaysBetweenPurchases  -- Calculate the number of days between consecutive purchases
+FROM PurchaseLead
+WHERE NextOrderDate IS NOT NULL -- Exclude the last purchase per vendor (no next order to compare)
+ORDER BY VendorName, OrderDate;
+
+```
+
+This result helps validate purchase frequency patterns before applying any aggregation.
+
+<img width="2005" height="560" alt="image" src="https://github.com/user-attachments/assets/adb7a323-75c8-45c8-bfcf-972d5af0e62f" />
+
+I reused the final query as a CTE to calculate the **Average Number of Days Between Purchases per Vendor**:
+
+![avg days gif](https://github.com/user-attachments/assets/03f01121-e4ce-4d6f-bb12-ad358b9bc046)
+
+*The last two vendors clearly stand out, having much larger gaps between purchases than the rest, which suggests less frequent ordering behavior.*
+
+>[!TIP]
+>
+> `LEAD()` looks forward to the next row, while `LAG()` looks backward to the previous one.
