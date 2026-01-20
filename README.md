@@ -638,7 +638,7 @@ In the **CTE**, I joined `Sales` and `Person` tables to retrieve order IDs along
 
 **Finally, I moved on to the Purchasing.**
 
-### TIME BETWEEN PURCHASES PER VENDOR
+### AVERAGE TIME BETWEEN PURCHASES PER VENDOR
 
 In this query, I analyze the time gaps between consecutive purchase orders for each vendor. I start from the `PurchaseOrderHeader` table and join it with the `Vendor` table to bring vendor names alongside purchase dates. Using the `LEAD()` **window function**, I retrieve the next order date for each vendor based on chronological order. Finally, I calculate **The Number of Days Between Purchases** using `DATEDIFF()`, keeping only rows where a next order exists.
 
