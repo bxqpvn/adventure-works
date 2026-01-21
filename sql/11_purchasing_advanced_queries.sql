@@ -41,3 +41,36 @@ GROUP BY VendorName
 ORDER BY AvgDaysBetweenPurchases ASC;   -- Vendors with the most frequent purchasing patterns appear first
 
 --==============================================================================================================================================
+
+/* First and Last Purchase per Vendor */
+
+WITH VendorNamesAndOrders AS (
+	SELECT
+		VendorID,
+		v.Name AS VendorName,
+		PurchaseOrderID,
+		CAST(OrderDate AS DATE) AS OrderDate			-- Convert DATETIME to DATE for cleaner output
+	FROM Purchasing.PurchaseOrderHeader poh
+	LEFT JOIN Purchasing.Vendor v						-- Join Vendor table to add vendor names
+		ON poh.VendorID = v.BusinessEntityID
+),
+VendorPurchases AS (
+	SELECT
+		VendorName,
+		FIRST_VALUE(OrderDate) OVER (
+			PARTITION BY VendorName 
+			ORDER BY OrderDate ASC) AS FirstPurchaseDate,	-- Get the first purchase date
+		LAST_VALUE(OrderDate) OVER (						-- Get the last purchase date
+			PARTITION BY VendorName 
+			ORDER BY OrderDate ASC
+			ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LastPurchaseDate
+	FROM VendorNamesAndOrders
+)
+SELECT DISTINCT					-- Final query: one row per vendor with first and last purchase dates
+	VendorName,
+	FirstPurchaseDate,
+	LastPurchaseDate
+FROM VendorPurchases
+ORDER BY VendorName;
+
+--==============================================================================================================================================
