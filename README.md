@@ -735,3 +735,8 @@ ORDER BY VendorName;
 The result set looks like this:
 
 ![first and last value gif](https://github.com/user-attachments/assets/f2de927e-f075-48ba-b021-6dc9bff845c3)
+
+
+>[!IMPORTANT]
+>
+> `FIRST_VALUE()` returns the earliest value within a partition, while `LAST_VALUE()` returns the last one. When using `LAST_VALUE()`, it is important to define the window frame explicitly. Otherwise, it may return incorrect results.
