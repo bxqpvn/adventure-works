@@ -689,3 +689,49 @@ I reused the final query as a CTE to calculate the **Average Number of Days Betw
 >[!TIP]
 >
 > `LEAD()` looks forward to the next row, while `LAG()` looks backward to the previous one.
+
+
+### FIRST AND LAST PURCHASE PER VENDOR
+
+Here, I wanted to identify the **earliest and most recent purchases** that AdventureWorks made from each vendor.
+
+The query is built using two **CTEs** followed by a final `SELECT`. In the first CTE, I joined the `PurchaseOrderHeader` table with the `Vendor` table to bring in vendor names and converted the `OrderDate` from `DATETIME` to `DATE` using the `CAST()` function for cleaner output. In the second CTE, I used **window functions** to derive two columns representing the **First and Last Purchase dates for each Vendor**.
+
+The final query returns the desired result: *each vendor’s name along with their earliest and most recent purchase dates*.
+
+```sql
+
+WITH VendorNamesAndOrders AS (
+	SELECT
+		VendorID,
+		v.Name AS VendorName,
+		PurchaseOrderID,
+		CAST(OrderDate AS DATE) AS OrderDate			-- Convert DATETIME to DATE for cleaner output
+	FROM Purchasing.PurchaseOrderHeader poh
+	LEFT JOIN Purchasing.Vendor v						-- Join Vendor table to add vendor names
+		ON poh.VendorID = v.BusinessEntityID
+),
+VendorPurchases AS (
+	SELECT
+		VendorName,
+		FIRST_VALUE(OrderDate) OVER (
+			PARTITION BY VendorID
+			ORDER BY OrderDate ASC) AS FirstPurchaseDate,	-- Get the first purchase date
+		LAST_VALUE(OrderDate) OVER (						-- Get the last purchase date
+			PARTITION BY VendorID 
+			ORDER BY OrderDate ASC
+			ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LastPurchaseDate
+	FROM VendorNamesAndOrders
+)
+SELECT DISTINCT					-- Final query: one row per vendor with first and last purchase dates
+	VendorName,
+	FirstPurchaseDate,
+	LastPurchaseDate
+FROM VendorPurchases
+ORDER BY VendorName;
+
+```
+
+The result set looks like this:
+
+![first and last value gif](https://github.com/user-attachments/assets/f2de927e-f075-48ba-b021-6dc9bff845c3)
