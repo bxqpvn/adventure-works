@@ -58,10 +58,10 @@ VendorPurchases AS (
 	SELECT
 		VendorName,
 		FIRST_VALUE(OrderDate) OVER (
-			PARTITION BY VendorName 
+			PARTITION BY VendorID
 			ORDER BY OrderDate ASC) AS FirstPurchaseDate,	-- Get the first purchase date
 		LAST_VALUE(OrderDate) OVER (						-- Get the last purchase date
-			PARTITION BY VendorName 
+			PARTITION BY VendorID
 			ORDER BY OrderDate ASC
 			ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LastPurchaseDate
 	FROM VendorNamesAndOrders
