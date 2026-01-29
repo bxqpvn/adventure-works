@@ -1,10 +1,10 @@
 ![SSMS 22](https://img.shields.io/badge/SSMS-22-blue) ![SQL Server](https://img.shields.io/badge/SQL%20Server-blue)
 ![adventureworkslogo](https://github.com/user-attachments/assets/8ee8d47e-54de-4f9e-af49-a9aa898066f2)
 
-***AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
+***🚲 AdventureWorks is a Microsoft sample database that simulates a fictional company, Adventure Works Cycles, and provides structured data across sales, production, HR, and other business areas.***
 
 >[!NOTE]
->### Project Overview & Tools
+>### 🧐 Project Overview & Tools
 >
 >*In this project, I will use SSMS 22 to connect to the AdventureWorks database. I will explore and analyze the tables, writing SQL queries to practice and demonstrate my SQL skills. After completing the SQL analysis, I also plan to build my first Power BI dashboard based on the insights gathered from the dataset.*
 >Tools:
@@ -17,7 +17,7 @@
 >
 >Power BI Desktop – Building the dashboard based on SQL insights
 
-# 1. Connecting to the AdventureWorks Database
+# 🔌Connecting to the AdventureWorks Database🗄️
 
 I restored the AdventureWorks2022 sample database in SSMS following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):
 
@@ -33,42 +33,42 @@ I restored the AdventureWorks2022 sample database in SSMS following the official
 
 ![bak file](https://github.com/user-attachments/assets/e30a8c9b-4b82-4b87-915b-af873a4275cc)
 
-- That’s it: the connection is set up and ready for querying
+- ✅ That’s it: the connection is set up and ready for querying
 
 ![connection restored succesfully](https://github.com/user-attachments/assets/fb6aca1c-09c2-4d23-865e-27432ac7bffa)
 
-# 2. Database Diagrams
+# 🧩Database Diagrams🔗
 
 To better understand the structure of the AdventureWorks database, I created diagrams for each major functional areas:
 
-### Production
+### 🟦 Production
 
 ![production diagram](https://github.com/user-attachments/assets/37165444-0abf-4e05-8d3a-06c7db46be77)
 
-### Sales
+### 🟩 Sales
 
 ![sales diagram](https://github.com/user-attachments/assets/2700a126-94cf-4c09-811f-261971652935)
 
-### Human Resources
+### 🟪 Human Resources
 
 ![HR diagram](https://github.com/user-attachments/assets/1b894189-4998-4228-8242-b0a256c95fb1)
 
-### Person
+### 🟧 Person
 
 ![person diagram](https://github.com/user-attachments/assets/425e89c7-d78e-46d5-b86b-3e2fabb6f939)
 
-### Purchasing
+### 🟨 Purchasing
 
 ![purchasing diagram](https://github.com/user-attachments/assets/8a9e729c-74b0-44d3-8541-071380b337e0)
 
-Done! This is how it looks in the Object Explorer window: 
+✅ Done! This is how it looks in the Object Explorer window: 
 
 ![database diagrams](https://github.com/user-attachments/assets/920a01a0-b819-4b96-93d1-eca7c909a21f)
 
 >[!IMPORTANT]
 >By showing table relationships (PK–FK) and the overall schema structure, these diagrams serve as a foundation for the SQL queries covered in the next section.
 
-# 3. Database Exploration
+# 👀Database Exploration🔎
 
 *In this section, I explore each functional area by reviewing table relationships and column metadata, including table and column properties. I also run basic queries to better understand the data before moving to advanced analysis.*
 
@@ -111,7 +111,7 @@ I followed the same steps for the HR, Person, and Purchasing schemas to get a qu
 
 **Initially, I focused on the Production tables:**
 
-### DATA QUALITY CHECKS
+### 🔵 DATA QUALITY CHECKS
 
 Before analysis, I defined a few data quality questions to identify missing or incomplete product attributes:
 
@@ -136,7 +136,7 @@ Before analysis, I defined a few data quality questions to identify missing or i
 > [!TIP]
 > When using CTEs with aggregate values, avoid adding a final `FROM` clause. Doing so repeats results across rows and forces the use of `DISTINCT`. Without it, the query returns only the aggregated values once, eliminating duplication.
 
-### AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
+### 🔵 AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
 
 This next query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
@@ -259,7 +259,7 @@ ORDER BY ListPrice DESC;
 
 *The most expensive manufactured in-house products are, unsurprisingly, the bicycles produced and assembled by AdventureWorks. Among the purchased products, the top includes components, accessories, and clothing.*
 
-### PRODUCT RATINGS
+### 🔵 PRODUCT RATINGS
 
 This query highlights only products with available ratings by **filtering out NULL values** using the ```WHERE``` clause and ```IS NOT NULL```, and includes reviewer details and comments to provide a qualitative perspective on product performance.
 
@@ -280,7 +280,7 @@ ORDER BY Rating DESC;
 
 **Next, I focused on the Sales functional area.**
 
-### MONTH-OVER-MONTH AND YEAR-OVER-YEAR SALES
+### 🟢 MONTH-OVER-MONTH AND YEAR-OVER-YEAR SALES
 
 I started by analyzing **MoM sales performance** to understand short-term **sales trends** and fluctuations.
 
@@ -356,7 +356,7 @@ This query compares total sales by year to highlight long-term growth trends whi
 > [!IMPORTANT]
 > I **extracted time components** from the order date and **aggregated total sales** at monthly and yearly levels. Using the `LAG()` **window function**, I compared each period’s sales with the previous one to calculate both **Month-over-Month** and **Year-over-Year** changes, while `NULLIF()` was applied to safely compute growth percentages and avoid division by zero.
 
-### AVERAGE ORDER VALUE BY REGION
+### 🟢 AVERAGE ORDER VALUE BY REGION
 
 This query calculates **Average Order Value by territory** for a selected year by **aggregating total sales** and **order counts**, providing a clearer comparison of purchasing behavior across regions.
 
@@ -367,7 +367,7 @@ _In 2014, territories like Central, Northeast, and Southeast had the highest ave
 > [!TIP]
 > Using a `WHERE` clause to filter by year is essential to keep the results comparable and meaningful.
 
-### RUNNING TOTAL OF MONTHLY SALES
+### 🟢 RUNNING TOTAL OF MONTHLY SALES
 
 This query calculates **monthly total sales** and a **Running Total** over time by first aggregating sales at a monthly level and then applying a **window function** to track how sales accumulate across the full period.
 
@@ -412,7 +412,7 @@ FROM SalesRunningTotal;
 > 
 > <img width="1411" height="90" alt="error runn tot" src="https://github.com/user-attachments/assets/7f8a1a76-5ee9-449e-89bb-cbc1d8fe27f1" />
 
-### SALES PER CATEGORY
+### 🟢🔵 SALES PER CATEGORY 
 
 In this section, I joined multiple tables from different functional areas, specifically *Sales* and *Production*, to analyze **Total Sales by Product Category**. 
 
@@ -466,7 +466,7 @@ Query results:
 
 **After completing the Sales analysis, the focus moves to the Human Resources.**
 
-### EMPLOYEE AGE AND TENURE ANALYSIS
+### 🟣 EMPLOYEE AGE AND TENURE ANALYSIS
 
 **This query analyzes Employee Age and Tenure** using data from the **HR functional area**, providing insights into workforce stability and experience by calculating each employee’s current age and number of years spent in the company.
 
@@ -529,7 +529,7 @@ ORDER BY YearsInCompany DESC;        -- Display employees ordered by tenure, fro
 
 ![hr query gif](https://github.com/user-attachments/assets/9509ab79-a737-483d-8717-a973454b8e6c)
 
-### VACATION HOURS AND EMPLOYEE COUNT BY DEPARTMENT
+### 🟣 VACATION HOURS AND EMPLOYEE COUNT BY DEPARTMENT
 
 **This query analyzes employee vacation hours and employee counts by department**, using only current department assignments for an up-to-date view.
 
@@ -545,7 +545,7 @@ ORDER BY YearsInCompany DESC;        -- Display employees ordered by tenure, fro
 
 **Next, I moved to the Person schema.**
 
-**CUSTOMER PROFILE OVERVIEW**
+### 🟠 CUSTOMER PROFILE OVERVIEW
 
 This query builds a **Customer Profile** by formatting full names, identifying middle name presence, and adding customer records with contact and location details.
 
@@ -626,7 +626,7 @@ In the first CTE, I create the full name for each person and check if a middle n
 >
 > Instead of using `CONCAT(FirstName, ' ', MiddleName, ' ', LastName)`, we could use `FirstName + ' ' + MiddleName + ' ' + LastName`, but this must also be handled within a `CASE` expression to avoid `NULL` results.
 
-### TOP 5 CUSTOMERS BY NUMBER OF ORDERS
+### 🟠 TOP 5 CUSTOMERS BY NUMBER OF ORDERS
 
 In this query, I want to see **which customers placed the most orders**, so I focused on the **Top 5 Customers by Number of Orders**.
 
@@ -638,7 +638,7 @@ In the **CTE**, I joined `Sales` and `Person` tables to retrieve order IDs along
 
 **Finally, I moved on to the Purchasing.**
 
-### AVERAGE TIME BETWEEN PURCHASES PER VENDOR
+### 🟡 AVERAGE TIME BETWEEN PURCHASES PER VENDOR
 
 In this query, I analyze the time gaps between consecutive purchase orders for each vendor. I start from the `PurchaseOrderHeader` table and join it with the `Vendor` table to bring vendor names alongside purchase dates. Using the `LEAD()` **window function**, I retrieve the next order date for each vendor based on chronological order. Finally, I calculate **The Number of Days Between Purchases** using `DATEDIFF()`, keeping only rows where a next order exists.
 
@@ -691,7 +691,7 @@ I reused the final query as a CTE to calculate the **Average Number of Days Betw
 > `LEAD()` looks forward to the next row, while `LAG()` looks backward to the previous one.
 
 
-### FIRST AND LAST PURCHASE PER VENDOR
+### 🟡 FIRST AND LAST PURCHASE PER VENDOR
 
 Here, I wanted to identify the **earliest and most recent purchases** that AdventureWorks made from each vendor.
 
