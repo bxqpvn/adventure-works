@@ -744,4 +744,9 @@ The result set looks like this:
 
 # ⭐Power BI Dashboard📊
 
-*In this section, I move from SQL to visualization by building a Power BI dashboard focused on Sales and Product insights, using metrics prepared in SSMS.*
+*In this section, I move from SQL to visualization by building a **Power BI dashboard** focused on Sales and Product insights, using metrics prepared in SSMS.*
+
+The first step was connecting **Power BI** to the **SQL Server database**:
+
+![pbi gif](https://github.com/user-attachments/assets/91610a50-3cc1-43c7-9790-4f1b3af10436)
+
