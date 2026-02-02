@@ -19,7 +19,7 @@
 
 # 🔌Connecting to the AdventureWorks Database🗄️
 
-I restored the AdventureWorks2022 sample database in SSMS following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):
+*I restored the AdventureWorks2022 sample database in SSMS following the official [Microsoft installation guide](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms):*
 
 - Moving the .bak file into the SQL Server backup folder
 
@@ -39,7 +39,7 @@ I restored the AdventureWorks2022 sample database in SSMS following the official
 
 # 🧩Database Diagrams🔗
 
-To better understand the structure of the AdventureWorks database, I created diagrams for each major functional areas:
+*To better understand the structure of the AdventureWorks database, I created diagrams for each major functional areas:*
 
 ### 🟦 Production
 
@@ -104,7 +104,7 @@ I followed the same steps for the HR, Person, and Purchasing schemas to get a qu
 >[!IMPORTANT]
 >This step helped me build a clear understanding of the database before moving on to more advanced queries.
 
-# 4. Advanced SQL Queries & Insights
+# ⚙️Advanced SQL Queries & Insights🎯
 
 *Here, I perform advanced SQL queries to uncover meaningful insights from the data, using filtering and analytics techniques to answer specific business questions.*
 
@@ -626,7 +626,7 @@ In the first CTE, I create the full name for each person and check if a middle n
 >
 > Instead of using `CONCAT(FirstName, ' ', MiddleName, ' ', LastName)`, we could use `FirstName + ' ' + MiddleName + ' ' + LastName`, but this must also be handled within a `CASE` expression to avoid `NULL` results.
 
-### 🟠 TOP 5 CUSTOMERS BY NUMBER OF ORDERS
+### 🟠🟢TOP 5 CUSTOMERS BY NUMBER OF ORDERS
 
 In this query, I want to see **which customers placed the most orders**, so I focused on the **Top 5 Customers by Number of Orders**.
 
@@ -740,3 +740,8 @@ The result set looks like this:
 >[!IMPORTANT]
 >
 > `FIRST_VALUE()` returns the earliest value within a partition, while `LAST_VALUE()` returns the last one. When using `LAST_VALUE()`, it is important to define the window frame explicitly. Otherwise, it may return incorrect results.
+
+
+# ⭐Power BI Dashboard📊
+
+*In this section, I move from SQL to visualization by building a Power BI dashboard focused on Sales and Product insights, using metrics prepared in SSMS.*
