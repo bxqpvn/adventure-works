@@ -141,7 +141,7 @@ Before analysis, I defined a few data quality questions to identify missing or i
 This next query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
 ```sql
-use AdventureWorks2022
+use AdventureWorks2022;
 
 WITH ProductionCategoryAndSubcategory as
 	(SELECT
@@ -149,7 +149,7 @@ WITH ProductionCategoryAndSubcategory as
 		p.Name as ProductName,
 		c.Name as Category,
 		sc.Name as Subcategory,
-		StandardCost,
+		StandardCost
 	FROM Production.Product p
 	LEFT JOIN Production.ProductSubcategory sc				-- Join Product with Category and Subcategory tables
 		ON p.ProductSubcategoryID = sc.ProductSubcategoryID
