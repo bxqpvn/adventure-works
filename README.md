@@ -136,7 +136,7 @@ Before analysis, I defined a few data quality questions to identify missing or i
 > [!TIP]
 > When using CTEs with aggregate values, avoid adding a final `FROM` clause. Doing so repeats results across rows and forces the use of `DISTINCT`. Without it, the query returns only the aggregated values once, eliminating duplication.
 
-### 🔵 AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
+### 🔵🟢 AGGREGATED PRODUCTION METRICS AT CATEGORY-LEVEL
 
 This next query retrieves a list of products along with their corresponding categories and subcategories. It joins the Product table with the ProductSubcategory and ProductCategory tables using **LEFT JOINs**, ensuring that all products are included even if some do not have a subcategory or category assigned.
 
@@ -150,11 +150,10 @@ WITH ProductionCategoryAndSubcategory as
 		c.Name as Category,
 		sc.Name as Subcategory,
 		StandardCost,
-		ListPrice	
 	FROM Production.Product p
-	left join Production.ProductSubcategory sc				-- Join Product with Category and Subcategory tables
+	LEFT JOIN Production.ProductSubcategory sc				-- Join Product with Category and Subcategory tables
 		ON p.ProductSubcategoryID = sc.ProductSubcategoryID
-	left join Production.ProductCategory c
+	LEFT JOIN Production.ProductCategory c
 		ON sc.ProductCategoryID = c.ProductCategoryID
 ),
 ```
@@ -166,21 +165,30 @@ As a result, I obtained the following table:
 After joining the required tables (as shown in the previous CTE), I calculated **aggregated production metrics at category-level**, including **costs, prices, profit, and profit margin**, and **handled missing category values** by assigning a default category label.
 
 ```sql
-CategoryCostAndProfit as
-	(SELECT
-		CASE
-		WHEN Category IS NULL THEN 'Others'				-- Products without assigned category						
-		ELSE Category
-		END AS Category,
-		COUNT(ProductID) as NumberOfProducts,						-- Number of products per category
-		ROUND(AVG(StandardCost),0) AS  AverageStandardCost,			-- Average standard cost per category
-		ROUND(AVG(ListPrice),0) as AverageListPrice,				-- Average list price per category
-		ROUND(SUM(StandardCost),2) AS  TotalCost,
-		ROUND(SUM(ListPrice),2) as TotalPrice,
-		SUM(ListPrice - StandardCost) as TotalProfit,				-- Total profit per category
-		ROUND(SUM(ListPrice - StandardCost) / NULLIF(SUM(ListPrice), 0) * 100, 2) AS ProfitMargin	-- Profit margin (%)
-	FROM ProductionCategoryAndSubcategory
-	GROUP BY Category
+CategorySalesAndProfit AS
+(
+    SELECT
+        CASE
+            WHEN c.Category IS NULL THEN 'Others'        -- Products without assigned category
+            ELSE c.Category
+        END AS Category,
+        COUNT(DISTINCT p.ProductID) AS NumberOfProducts, -- Number of distinct products per category
+        SUM(sod.OrderQty * p.StandardCost) AS TotalCost, -- Total cost based on sold quantity
+        SUM(
+            sod.LineTotal - (sod.OrderQty * p.StandardCost)
+        ) AS TotalProfit,                                -- Total profit based on real sales
+        ROUND(
+            SUM(
+                sod.LineTotal - (sod.OrderQty * p.StandardCost)
+            ) / NULLIF(SUM(sod.LineTotal), 0) * 100,
+            2
+        ) AS ProfitMargin                                -- Profit margin (%) per category
+    FROM ProductionCategoryAndSubcategory c
+    LEFT JOIN Production.Product p
+        ON c.ProductID = p.ProductID
+    LEFT JOIN Sales.SalesOrderDetail sod                 -- Join with Sales table to get real sales data
+        ON p.ProductID = sod.ProductID
+    GROUP BY c.Category
 )
 ```
 
@@ -188,31 +196,28 @@ A profitability rank was then added using the **```RANK()``` function**, along w
 
 ```sql
 SELECT
-	Category,
-	NumberOfProducts,
-	AverageStandardCost,
-	AverageListPrice,
-	TotalCost,
-	TotalPrice,
-	TotalProfit,
-	ProfitMargin,
-	RANK() OVER (ORDER BY TotalProfit DESC) AS ProfitabilityRank,			-- Ranked the profit using RANK()
-	CASE
-		WHEN TotalProfit > 50000 THEN 'Most Profitable'						-- Profitability flag by profit ranges with CASE
-		WHEN TotalProfit BETWEEN 15000 AND 50000 THEN 'Very Profitable'
-		ELSE 'Profitable'
-		END AS ProfitabilityFlag
-FROM CategoryCostAndProfit
+    Category,
+    NumberOfProducts,
+    TotalCost,
+    TotalProfit,
+    ProfitMargin,
+    RANK() OVER (ORDER BY TotalProfit DESC) AS ProfitabilityRank, -- Rank categories by total profit
+    CASE
+        WHEN TotalProfit > 500000 THEN 'Most Profitable'          -- Profitability flag by profit ranges
+        WHEN TotalProfit BETWEEN 150000 AND 500000 THEN 'Very Profitable'
+        ELSE 'Profitable'
+    END AS ProfitabilityFlag
+FROM CategorySalesAndProfit
 ORDER BY TotalProfit DESC;
 ```
 
 The table below shows the output of this query.
 
-![category-level metrics](https://github.com/user-attachments/assets/0be18770-d343-420c-a99c-534416dcc144)
+<img width="2347" height="280" alt="image" src="https://github.com/user-attachments/assets/26dbb6ec-5fd2-4f80-b943-40b1b12e9740" />
 
-*As we can see, the most profitable categories are Bicycles and Components, followed by Clothing, Accessories, and the 'Others' category.*
+*As we can see, the most profitable categories are Bicycles and Accessories, followed by Components, Clothing and the 'Others' category.*
 
-### TOP 10 MOST EXPENSIVE PRODUCTS
+### 🔵 TOP 10 MOST EXPENSIVE PRODUCTS
 
 > [!WARNING]
 > In the first phase, I wrote this query, but the result was not satisfying because it returned a table with the same products repeated, only differing by size/variant. In practice, the columns representing product names and their prices were duplicated.
