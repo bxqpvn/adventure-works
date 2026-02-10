@@ -64,47 +64,51 @@ WITH ProductionCategoryAndSubcategory as
 		p.Name as ProductName,
 		c.Name as Category,
 		sc.Name as Subcategory,
-		StandardCost,
-		ListPrice	
+		StandardCost
 	FROM Production.Product p
-	left join Production.ProductSubcategory sc				-- Join Product with Category and Subcategory tables
+	LEFT JOIN Production.ProductSubcategory sc				-- Join Product with Category and Subcategory tables
 		ON p.ProductSubcategoryID = sc.ProductSubcategoryID
-	left join Production.ProductCategory c
+	LEFT JOIN Production.ProductCategory c
 		ON sc.ProductCategoryID = c.ProductCategoryID
 ),
-CategoryCostAndProfit as
-	(SELECT
-		CASE
-		WHEN Category IS NULL THEN 'Others'				-- Products without assigned category						
-		ELSE Category
-		END AS Category,
-		COUNT(ProductID) as NumberOfProducts,						-- Number of products per category
-		ROUND(AVG(StandardCost),0) AS  AverageStandardCost,			-- Average standard cost per category
-		ROUND(AVG(ListPrice),0) as AverageListPrice,				-- Average list price per category
-		ROUND(SUM(StandardCost),2) AS  TotalCost,
-		ROUND(SUM(ListPrice),2) as TotalPrice,
-		SUM(ListPrice - StandardCost) as TotalProfit,				-- Total profit per category
-		ROUND(SUM(ListPrice - StandardCost) / NULLIF(SUM(ListPrice), 0) * 100, 2) AS ProfitMargin	-- Profit margin (%)
-	FROM ProductionCategoryAndSubcategory
-	GROUP BY Category
+CategorySalesAndProfit AS
+(
+    SELECT
+        CASE
+            WHEN c.Category IS NULL THEN 'Others'        -- Products without assigned category
+            ELSE c.Category
+        END AS Category,
+        COUNT(DISTINCT p.ProductID) AS NumberOfProducts, -- Number of distinct products per category
+        SUM(sod.OrderQty * p.StandardCost) AS TotalCost, -- Total cost based on sold quantity
+        SUM(
+            sod.LineTotal - (sod.OrderQty * p.StandardCost)
+        ) AS TotalProfit,                                -- Total profit based on real sales
+        ROUND(
+            SUM(
+                sod.LineTotal - (sod.OrderQty * p.StandardCost)
+            ) / NULLIF(SUM(sod.LineTotal), 0) * 100,
+            2
+        ) AS ProfitMargin                                -- Profit margin (%) per category
+    FROM ProductionCategoryAndSubcategory c
+    LEFT JOIN Production.Product p
+        ON c.ProductID = p.ProductID
+    LEFT JOIN Sales.SalesOrderDetail sod                 -- Join with Sales table to get real sales data
+        ON p.ProductID = sod.ProductID
+    GROUP BY c.Category
 )
 SELECT
-	Category,
-	NumberOfProducts,
-	AverageStandardCost,
-	AverageListPrice,
-	TotalCost,
-	TotalPrice,
-	TotalProfit,
-	ProfitMargin,
-	RANK() OVER (ORDER BY TotalProfit DESC) AS ProfitabilityRank,			-- Ranked the profit using RANK()
-	CASE
-		WHEN TotalProfit > 50000 THEN 'Most Profitable'						-- Profitability flag by profit ranges with CASE
-		WHEN TotalProfit BETWEEN 15000 AND 50000 THEN 'Very Profitable'
-		ELSE 'Profitable'
-		END AS ProfitabilityFlag
-FROM CategoryCostAndProfit
-ORDER BY TotalProfit DESC;
+    Category,
+    NumberOfProducts,
+    TotalCost,
+    TotalProfit,
+    ProfitMargin,
+    RANK() OVER (ORDER BY TotalProfit DESC) AS ProfitabilityRank, -- Rank categories by total profit
+    CASE
+        WHEN TotalProfit > 500000 THEN 'Most Profitable'          -- Profitability flag by profit ranges
+        WHEN TotalProfit BETWEEN 150000 AND 500000 THEN 'Very Profitable'
+        ELSE 'Profitable'
+    END AS ProfitabilityFlag
+FROM CategorySalesAndProfit;
 
 --==============================================================================================================================================
 
@@ -146,4 +150,4 @@ LEFT JOIN Production.ProductReview pr
 WHERE Rating is NOT NULL	-- Only 4 products have received a review
 ORDER BY Rating DESC;
 
-------------------------------------------------------------------------------------------------------------------------------------------------
+--==============================================================================================================================================
