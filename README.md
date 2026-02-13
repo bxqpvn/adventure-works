@@ -755,3 +755,5 @@ The first step was connecting **Power BI** to the **SQL Server database**:
 
 ![pbi gif](https://github.com/user-attachments/assets/91610a50-3cc1-43c7-9790-4f1b3af10436)
 
+
+<img width="2186" height="1009" alt="dashboard" src="https://github.com/user-attachments/assets/0902891f-91aa-47ea-8a8f-311931e1a459" />
