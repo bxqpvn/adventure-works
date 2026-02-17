@@ -757,6 +757,6 @@ The first step was connecting **Power BI** to the **SQL Server database**:
 
 Then, i started to build the dashboard, using the [Nebula by BI Samurai](https://bisamurai.com/nebula/).
 
-<img width="2186" height="1009" alt="dashboard" src="https://github.com/user-attachments/assets/0902891f-91aa-47ea-8a8f-311931e1a459" />
+<img width="2560" height="1032" alt="image" src="https://github.com/user-attachments/assets/d7dbcf27-95b1-45da-b697-aff0cd9e143b" />
 
 Its my first time trying that visual, but i really like it. I planed from the scratch of this project that in the final of it i will build a dashboard with nebula.
