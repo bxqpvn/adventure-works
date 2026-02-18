@@ -760,3 +760,7 @@ Then, i started to build the dashboard, using the [Nebula by BI Samurai](https:/
 <img width="2560" height="1032" alt="image" src="https://github.com/user-attachments/assets/d7dbcf27-95b1-45da-b697-aff0cd9e143b" />
 
 Its my first time trying that visual, but i really like it. I planed from the scratch of this project that in the final of it i will build a dashboard with nebula.
+
+After that, I continued improving the dashboard by adding some charts, filters, and slightly adjusting the design:
+
+<img width="2560" height="1032" alt="image" src="https://github.com/user-attachments/assets/999bfb14-fb00-4e50-98ac-22349814938c" />
