@@ -764,3 +764,5 @@ Its my first time trying that visual, but i really like it. I planed from the sc
 After that, I continued improving the dashboard by adding some charts, filters, and slightly adjusting the design:
 
 <img width="2560" height="1032" alt="image" src="https://github.com/user-attachments/assets/999bfb14-fb00-4e50-98ac-22349814938c" />
+
+<img width="1425" height="802" alt="image" src="https://github.com/user-attachments/assets/6bb84bea-4505-48dc-8162-a724ce561329" />
